@@ -1,8 +1,10 @@
 ## 文档区
 
 这个目录下放的是我们在开发过程中的一些文档，包括了我们的一些设计和想法。
-
-
+## 碎片文档
+* requirements(maintained by ZhiJing Wu)
+* interfaces(maintained by Linkous)
+* schedule(in home page, maintained by Minghao Xie)
 
 ## 待完成文档
 * 需求规格说明书
@@ -12,7 +14,7 @@
 * 安装使用说明书
 
 ## 修改中文档
-None
+* requirements(maintained by Minghao Xie)
 
 ## 已完成文档
 None
