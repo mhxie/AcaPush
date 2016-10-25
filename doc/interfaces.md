@@ -6,22 +6,46 @@ RESTful Design
 
 ### 查询类接口：
 
-访问用户资料：/profile/user_info
-访问用户的收藏夹/profile/user_favorite
-访问用户的历史纪录:/profile/user_history
-搜索接口：/search
+访问用户资料
+
+	/profile/user_info  
+访问用户的收藏夹
+
+	/profile/user_favorite  
+访问用户的历史纪录
+	
+	/profile/user_history  
+搜索接口
+	
+	/search
 
 ### 操作类接口：
-更改用户资料：/alter/user_info，此接口用于用户访问  
-修改用户的收藏夹/profile/user_favorite  
-搜索接口：/search  
-登陆接口：/login  
-登出接口：/logout  
+更改用户资料
+	
+	/alter/user_info，此接口用于用户访问  
+修改用户的收藏夹
+
+	/profile/user_favorite  
+搜索接口
+
+	/search  
+登陆接口
+
+	/login  
+登出接口
+
+	/logout  
 
 ### 推送类接口
-评论列表：/comments  
-新闻列表：/news  
-通知列表：/notice  
+评论列表
+
+	/comments  
+新闻列表
+
+	/news  
+通知列表
+
+	/notice  
 
 ## 二：后端
 ### 数据类型：
