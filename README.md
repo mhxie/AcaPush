@@ -3,19 +3,23 @@
 软件工程课程作业，开发出能够抓取所有四川大学学院的新闻通知的全平台客户端（包括安卓，iOS，网页），目前作为后端开展项目。
 
 
-## 项目开发进度预计(Update on Oct 26)
-预计开发时长：两个月（Oct 19 - Nov 19）
+## 项目开发进度预计(Last Modification, Nov 1)
+预计开发时长：两个月（Oct 19 - Dec 19）
 
 * 教学周第七周-第八周  
-	* 需求设计
-	* 接口设计
-	* 进度规划
+	* [需求设计](https://github.com/Yetocome/AcaPush/tree/master/doc/Scenario-based%20models)[completed]
+	* [接口设计](https://github.com/Yetocome/AcaPush/blob/master/doc/interfaces.md)[completed, still poor]
+	* 进度规划[completed]
 * 教学周第八周-第九周  
-	* 完善讨论需求
-	* 设计数据库
-	* 完成关键部分的活动图
-	* 完成关键数据的流图
-* 教学周第八周-第十周  
+	* 完善讨论需求[completed]
+		* 完成了基本的用例设计，见`\doc\Scenario-based models\`[跳转](https://github.com/Yetocome/AcaPush/tree/master/doc/Scenario-based%20models)
+		* 完成了对应用例的用例图绘制，见`\doc\pic\`[跳转](https://github.com/Yetocome/AcaPush/tree/master/doc/pic)
+	* 设计数据库[completed]
+		* 完成数据库基本设计，包括结构设计和逻辑设计，[文档]()
+		* Crow's food图绘制，[跳转](https://github.com/Yetocome/AcaPush/blob/master/doc/pic/database-overview.png)
+	* 完成关键部分的活动图[not completed]
+	* 完成关键数据的流图[not completed]
+* 教学周第九周-第十二周  
   * 实际编码
   * 测试驱动开发（TDD）
 * 教学周第十二周-第十四周  
@@ -25,3 +29,6 @@
 ## TO-DO
 * 数据库设计（和爬虫组协商）
 * 小组分工
+* 完成关键部分的活动图[due by 第九周]
+* 完成关键数据的流图[due by 第九周]
+* 完善数据库设计[due by 第九周]
