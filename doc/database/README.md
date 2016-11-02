@@ -1,6 +1,6 @@
 ## 数据库设计
 
-**Iteration**: 1, last modification: Oct 30 by Zhijing Wu
+**Iteration**: 1, last modification: Nov 2 by Zhijing Wu
 
 **Relation Graph**:
 

@@ -15,7 +15,7 @@
 		* 完成了基本的用例设计，见`\doc\Scenario-based models\`[跳转](https://github.com/Yetocome/AcaPush/tree/master/doc/Scenario-based%20models)
 		* 完成了对应用例的用例图绘制，见`\doc\pic\`[跳转](https://github.com/Yetocome/AcaPush/tree/master/doc/pic)
 	* 设计数据库[completed]
-		* 完成数据库基本设计，包括结构设计和逻辑设计，[文档]()
+		* 完成数据库基本设计，包括结构设计和逻辑设计，[文档](https://github.com/Yetocome/AcaPush/blob/master/doc/database/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%AF%B4%E6%98%8E%E4%B9%A6.docx)
 		* Crow's food图绘制，[跳转](https://github.com/Yetocome/AcaPush/blob/master/doc/pic/database-overview.png)
 	* 完成关键部分的活动图[not completed]
 	* 完成关键数据的流图[not completed]
