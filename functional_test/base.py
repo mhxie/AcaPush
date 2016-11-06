@@ -21,7 +21,7 @@ class FunctionalTest(StaticLiveServerTestCase):
             super().tearDownClass()
 
     def setUp(self):
-        self.browser = webdriver.Chrome('/Users/xmh/Desktop/python3/chromedriver')
+        self.browser = webdriver.Chrome()
         self.browser.implicitly_wait(3)
 
     def tearDown(self):
