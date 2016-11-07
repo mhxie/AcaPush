@@ -1,16 +1,44 @@
 from django.shortcuts import render
-
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden
+from newspush.models import News, NewsComment, StudentInfo
+from newspush.forms import CommentForm, LoginForm
+import requests
 # Create your views here.
 
 def commit_comment(request, news_id):
-    news_ = news.objects.get(id=news_id)
+    news_ = News.objects.get(id=news_id)
     form = CommentForm()
     if request.method == 'POST':
         form = CommentForm(data=request.POST)
         if form.is_valid():
             newsComment.objects.create(
-                
+
             )
+
+def login(request):
+    if request.method = 'POST':
+        form = LoginForm(request.POST)
+        form_data = form.cleaned_data
+        post_data = {
+            'zjh': form_data['id_'],
+            'mm': form_data['password_'],
+        }
+        s = requests.Session()
+        r = s.post('http://202.115.47.141/loginAction.do', data=post_data)
+        if r.ok:
+            r = s.get('http://202.115.47.141/menu/s_top.jsp')
+            if r.ok:
+                stu_name = '你的名字' # 需要从中提取姓名
+                stu = StudentInfo(studentID=form_data['id_'])
+                stu.nickname = form_data['nickname_']
+                stu.name = stu_name
+                stu.save()
+                html = "<html><body>This guy's name is %s.</body></html>" % stu_name
+                return HttpResponse(html)
+            else:
+                raise HttpResponseNotFound
+        else:
+            raise HttpResponseForbidden
 
 def fetch_news(request):
     new_id=request.GET['news_id']
@@ -33,4 +61,3 @@ def search_notice(request):
     d=request.GET['date']
     response_data=serializers.serialize("json",notice.objects.filter(academy=aca,date<=d)
     return HttpResponse(json.dumps(response_data),content_type="application/json")
-    
