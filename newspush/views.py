@@ -2,27 +2,39 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden
 from newspush.models import News, NewsComment, StudentInfo
 from newspush.forms import CommentForm, LoginForm
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, OperationalError
+from django.core import serializers
 import requests
 # Create your views here.
 
-def commit_comment(request, news_id):
-    news_ = News.objects.get(id=news_id)
-    form = CommentForm()
+def commit_comment(request, news_id, stu_id):
+    try:
+        news_ = News.objects.get(id=news_id)
+        student_ = StudentInfo.objects.get(studentID=stu_id)
+    except OperationalError:
+        return HttpResponseNotFound
     if request.method == 'POST':
         form = CommentForm(data=request.POST)
         if form.is_valid():
-            newsComment.objects.create(
+            form.save(for_news=news_, for_stu_info=student_)
+            html = "<html><body>Comment succeed.</body></html>"
+            return HttpResponse(html)
 
-            )
+def fetch_comments(request, news_id):
+    try:
+        news_ = News.objects.get(id=news_id)
+    except OperationalError:
+        return HttpResponseNotFound
+    returned_comments = NewsComment.objects.filter(news=news_)
+    response_data = serializers.serialize('json', returned_comments)
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 def login(request):
     if request.method = 'POST':
         form = LoginForm(request.POST)
-        try:
-            form_data = form.cleaned_data
-        except ValidationError:
+        if not form.is_valid():
             return HttpResponseNotFound
+        form_data = form.data
         post_data = {
             'zjh': form_data['scu_id'],
             'mm': form_data['password'],
@@ -65,3 +77,9 @@ def search_notice(request):
     d=request.GET['date']
     response_data=serializers.serialize("json",notice.objects.filter(academy=aca,date<=d)
     return HttpResponse(json.dumps(response_data),content_type="application/json")
+
+
+# To-Do
+# 1. 完成视图测试
+# 2. 完成名字提取
+# 3. 注意中文编码

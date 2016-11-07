@@ -12,7 +12,6 @@ class CommentFormTest(TestCase):
     def test_form_validation_for_blank_items(self):
         student_ = StudentInfo.objects.create(studentID='2014141466666')
         form = CommentForm(data={'content': '',
-                                 'studentID': '2014141466666',
                                  'ip': '127.0.0.1'})
         self.assertFalse(form.is_valid())
         self.assertEqual(form.errors['content'], [EMPTY_INPUT_ERROR])

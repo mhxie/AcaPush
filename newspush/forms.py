@@ -3,7 +3,7 @@ from newspush.models import NewsComment, StudentInfo
 from django.core.exceptions import ValidationError
 
 
-EMPTY_INPUT_ERROR = "You can't have an empty comment item"
+EMPTY_INPUT_ERROR = "You can't have an empty item"
 TOO_LONG_ERROR = "Too long!!!"
 TOO_SHORT_ERROR = "Too short!!!"
 
