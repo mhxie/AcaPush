@@ -3,7 +3,9 @@ from newspush.models import NewsComment, StudentInfo
 from django.core.exceptions import ValidationError
 
 
-EMPTY_COMMENT_ERROR = "You can't have an empty comment item"
+EMPTY_INPUT_ERROR = "You can't have an empty comment item"
+TOO_LONG_ERROR = "Too long!!!"
+TOO_SHORT_ERROR = "Too short!!!"
 
 class CommentForm(forms.models.ModelForm):
     class Meta:
@@ -11,7 +13,7 @@ class CommentForm(forms.models.ModelForm):
         fields = ('content', 'ip',)
 
         error_messages = {
-            'content': {'required': EMPTY_COMMENT_ERROR}
+            'content': {'required': EMPTY_INPUT_ERROR}
         }
 
     def save(self, for_news, for_stu_info):
@@ -20,10 +22,13 @@ class CommentForm(forms.models.ModelForm):
         return super().save()
 
 class LoginForm(forms.Form):
-    id_ = CharField()
-    password_ = CharField()
-    name_ = CharField(required=False, **max_length=20**)
-    nickname_ = CharField(required=False, **max_length=20**)
-
-    def check_scu(self):
-        
+    scu_id = forms.CharField(max_length=13, min_length=13,
+                             error_messages={
+                                'max_length': TOO_LONG_ERROR,
+                                'min_length': TOO_SHORT_ERROR,
+                            })
+    password = forms.CharField(error_messages={'required': EMPTY_INPUT_ERROR})
+    name = forms.CharField(required=False, max_length=20,
+                           error_messages={'max_length': TOO_LONG_ERROR})
+    nickname = forms.CharField(required=False, max_length=20,
+                               error_messages={'max_length': TOO_LONG_ERROR})

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden
 from newspush.models import News, NewsComment, StudentInfo
 from newspush.forms import CommentForm, LoginForm
+from django.core.exceptions import ValidationError
 import requests
 # Create your views here.
 
@@ -18,10 +19,13 @@ def commit_comment(request, news_id):
 def login(request):
     if request.method = 'POST':
         form = LoginForm(request.POST)
-        form_data = form.cleaned_data
+        try:
+            form_data = form.cleaned_data
+        except ValidationError:
+            return HttpResponseNotFound
         post_data = {
-            'zjh': form_data['id_'],
-            'mm': form_data['password_'],
+            'zjh': form_data['scu_id'],
+            'mm': form_data['password'],
         }
         s = requests.Session()
         r = s.post('http://202.115.47.141/loginAction.do', data=post_data)
@@ -29,8 +33,8 @@ def login(request):
             r = s.get('http://202.115.47.141/menu/s_top.jsp')
             if r.ok:
                 stu_name = '你的名字' # 需要从中提取姓名
-                stu = StudentInfo(studentID=form_data['id_'])
-                stu.nickname = form_data['nickname_']
+                stu = StudentInfo(studentID=form_data['scu_id'])
+                stu.nickname = form_data['nickname']
                 stu.name = stu_name
                 stu.save()
                 html = "<html><body>This guy's name is %s.</body></html>" % stu_name
