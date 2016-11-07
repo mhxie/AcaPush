@@ -5,6 +5,7 @@ from newspush.forms import CommentForm, LoginForm
 from django.core.exceptions import ValidationError, OperationalError
 from django.core import serializers
 import requests
+import json
 # Create your views here.
 
 def commit_comment(request, news_id, stu_id):
@@ -56,28 +57,49 @@ def login(request):
         else:
             raise HttpResponseForbidden
 
-def fetch_news(request):
-    new_id=request.GET['news_id']
-    response_data=serializers.serialize("json",news.objects.filter(id=news_id)
+def fetch_news(request,aca_id,d):
+    aca_id=request.GET['aca_id']
+    d=request.GET['d']
+    
+    try:
+        response_data=serializers.serialize("json",News.objects.filter(academy=aca_id,date<=d)
+    except OperationalError:
+        return HttpResponseNotFound
+                                        
     return HttpResponse(json.dumps(response_data),content_type="application/json")
 
-def fetch_notice(request):
-    notice_id=request.GET['notice_id']
-    response_data=serializers.serialize("json",notice.objects.filter(id=notice_id)
+def fetch_notice(request,aca_id,d):
+    aca_id=request.GET['aca_id']
+    d=request.GET['d']
+    
+    try:
+        response_data=serializers.serialize("json",Notice.objects.filter(academy=aca_id,date<=d)
+    except OperationalError:
+        return HttpResponseNotFound
+                                        
     return HttpResponse(json.dumps(response_data),content_type="application/json")
 
-def search_news(request):
+def search(request,flag,keyword,aca_id,d):
+    flag=request.GET['flag']
+    keyword=request.GET['keyword']                                    
     aca=request.GET['academy']
     d=request.GET['date']
-    response_data=serializers.serialize("json",news.objects.filter(academy=aca,date<=d)
+
+    if flag==0  #news                              
+    try:
+        response_data=serializers.serialize("json",News.objects.filter(academy=aca_id,date<=d)
+    except OperationalError:
+        return HttpResponseNotFound
+                                        
     return HttpResponse(json.dumps(response_data),content_type="application/json")
 
-def search_notice(request):
-    aca=request.GET['academy']
-    d=request.GET['date']
-    response_data=serializers.serialize("json",notice.objects.filter(academy=aca,date<=d)
+    else if flag==1  #notice
+    try:
+        response_data=serializers.serialize("json",Notice.objects.filter(academy=aca_id,date<=d)
+    except OperationalError:
+        return HttpResponseNotFound
+                                        
     return HttpResponse(json.dumps(response_data),content_type="application/json")
-
 
 # To-Do
 # 1. 完成视图测试
