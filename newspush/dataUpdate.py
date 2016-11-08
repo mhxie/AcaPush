@@ -4,8 +4,8 @@ import traceback
 from django.db import models
 
 
-# it ought to be a json file 
-def data_update(data_name):
+# insert news or noice json file 
+def data_insert(data_name):
 	# get information
 	try:
 		data = open(data_name)
@@ -34,7 +34,7 @@ def data_update(data_name):
 			traceback.print_exc()
 			return
 		try:
-			ID = models.News.objects.get(originURL=originURL)
+			ID = models.News.objects.get(originURL=originURL).id()
 		except Exception as e:
 			traceback.print_exc()
 			return
@@ -54,7 +54,7 @@ def data_update(data_name):
 
 	# save the information to file system
 	try:
-		f = open(file_path + "/" + ID + ".txt","a+")
+		f = open(file_path + "/" + str(ID) + ".txt","a+")
 	except Exception as e:
 		traceback.print_exc()
 		return
@@ -62,4 +62,47 @@ def data_update(data_name):
 		f.write(data)
 		f.close()
 	data.close()
-			
+
+
+# insert news comment json file 
+def comment_indert(data_name):
+	# get information
+	try:
+		data = open(data_name)
+		s = json.load(data)
+		news = s["news"]
+		studentInfo = s["studentInfo"]
+		content = s["content"]
+		ip = s["ip"]
+	except Exception as e:
+		traceback.print_exc()
+		return
+
+	# insert news comment into database
+	try:
+		models.NewsComment.objects.create(news=news,studentInfo=studentInfo,content=content,time=time,ip=ip)
+	except Exception as e:
+		traceback.print_exc()
+		return
+	data.close()
+
+# init academy json file
+def init_academy(data_name):
+	try:
+		data = open(data_name)
+		s = json.load(data)
+	except Exception as e:
+		traceback.print_exc()
+		return
+	else:
+		len = len(s["academy"])
+		for i in range(0,len):
+			code = s["academy"][i]["code"]
+			name = s["academy"][i]["name"]
+			address = s["academy"][i]["address"]
+			models.Academy.objects.create(code=code,name=name,address=address)
+	data.close()
+
+
+
+

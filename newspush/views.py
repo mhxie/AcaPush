@@ -15,7 +15,7 @@ def commit_comment(request, news_id, stu_id):
     except OperationalError:
         return HttpResponseNotFound
     if request.method == 'POST':
-        form = CommentForm(data=request.POST)
+        form = CommdeentForm(data=request.POST)
         if form.is_valid():
             form.save(for_news=news_, for_stu_info=student_)
             html = "<html><body>Comment succeed.</body></html>"
@@ -62,7 +62,7 @@ def fetch_news(request,aca_id,d):
     d=request.GET['d']
     
     try:
-        response_data=serializers.serialize("json",News.objects.filter(academy=aca_id,date<=d)
+        response_data=serializers.serialize("json",News.objects.filter(academy=aca_id,date<=d))
     except OperationalError:
         return HttpResponseNotFound
                                         
@@ -73,7 +73,7 @@ def fetch_notice(request,aca_id,d):
     d=request.GET['d']
     
     try:
-        response_data=serializers.serialize("json",Notice.objects.filter(academy=aca_id,date<=d)
+        response_data=serializers.serialize("json",Notice.objects.filter(academy=aca_id,date<=d))
     except OperationalError:
         return HttpResponseNotFound
                                         
@@ -87,7 +87,7 @@ def search(request,flag,keyword,aca_id,d):
 
     if flag==0  #news                              
     try:
-        response_data=serializers.serialize("json",News.objects.filter(academy=aca_id,date<=d)
+        response_data=serializers.serialize("json",News.objects.filter(academy=aca_id,date<=d))
     except OperationalError:
         return HttpResponseNotFound
                                         
@@ -95,7 +95,7 @@ def search(request,flag,keyword,aca_id,d):
 
     else if flag==1  #notice
     try:
-        response_data=serializers.serialize("json",Notice.objects.filter(academy=aca_id,date<=d)
+        response_data=serializers.serialize("json",Notice.objects.filter(academy=aca_id,date<=d))
     except OperationalError:
         return HttpResponseNotFound
                                         

@@ -1,6 +1,6 @@
 ## 数据库设计
 
-**Iteration**: 1, last modification: Nov 4 by Zhijing Wu
+**Iteration**: 1, last modification: Nov 8 by Zhijing Wu
 
 **log**:
 
@@ -8,6 +8,11 @@
 	* Modify database design including database field name
 	* Modify the database-overview picture
 	* add create database code
+* 2016-11-08
+	* 修改数据库相关字段及约束
+	* 数据库建表完成
+	* 新闻通知插入、评论插入、初始化学院表编码初步完成
+	* 与爬虫组数据交互格式初步完成
 
 **Relation Graph**:
 
