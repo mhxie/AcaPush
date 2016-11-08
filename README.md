@@ -3,7 +3,7 @@
 软件工程课程作业，开发出能够抓取所有四川大学学院的新闻通知的全平台客户端（包括安卓，iOS，网页），目前作为后端开展项目。
 
 
-## 项目开发进度预计(Last Modification, Nov 1)
+## 项目开发进度预计(Last Modification, Nov 8)
 预计开发时长：两个月（Oct 19 - Dec 19）
 
 * 教学周第七周
@@ -17,20 +17,24 @@
 	* 设计数据库[completed]
 		* 完成数据库基本设计，包括结构设计和逻辑设计，[文档](https://github.com/Yetocome/AcaPush/blob/master/doc/database/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%AF%B4%E6%98%8E%E4%B9%A6.docx)
 		* Crow's food图绘制，[跳转](https://github.com/Yetocome/AcaPush/blob/master/doc/pic/database-overview.png)
-* 教学周第九周[Current week]
-	* 完善接口设计及其编码[up to Zhoufan Jia, not completed]
-	* 完善数据库设计及其编码[up to Zhijing Wu, not completed]
-	* 完成功能测试、部分视图代码编写[up to Minghao Xie, not completed]
-* 教学周第十周-第十二周  
-  * 和其他小组协商
-  * 完善系统
-* 教学周第十二周-第十四周  
-	* 后期调试
+* 教学周第九周
+	* 部分视图和路由代码的编写[up to Zhoufan Jia, completed]
+	* 数据库插入新闻通知、初始化学院表代码，以及爬虫组数据交互格式[up to Zhijing Wu, completed]
+	* 部分单元测试和视图代码编写[up to Minghao Xie, completed]
+* 教学周第十周[Current week]
+	* 完善并改进现有代码
+* 教学周第十一周 - 第十二周
+	* 和其他小组协商改进接口
+	* 完成所有单元测试
+* 教学周第十二周 - 第十四周  
+	* 项目上线
 	* 对项目进行回顾总结
 
 ## TO-DO
-* 数据库设计（和爬虫组协商）
-* 小组分工
-* 完成关键部分的活动图[due by 第九周]
-* 完成关键数据的流图[due by 第九周]
-* 完善数据库设计[due by 第九周]
+* 数据库设计（和爬虫组协商）[done]
+* 小组分工[done]
+* 完成关键部分的活动图[canceled]
+* 完成关键数据的流图[canceled]
+* 完善数据库设计[done]
+* 视图测试、数据库测试
+* 代码部署
