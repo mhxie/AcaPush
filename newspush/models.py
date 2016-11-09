@@ -3,9 +3,9 @@ from django.db import models
 # Create your models here.
 
 class Academy(models.Model):
-    code = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    address = models.CharField(max_length=255)
+    # code = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, default="SCU")
+    address = models.CharField(max_length=255, default="www.scu.edu.cn")
 
 class News(models.Model):
     academy = models.ForeignKey(Academy, default=None)

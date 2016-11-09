@@ -6,11 +6,11 @@ class AcademyModelTest(TestCase):
     def test_no_duplicate_Academy(self):
         pass
     def test_can_save_and_retriving_Academy(self):
-        first_academy = Academy(code='cs')
+        first_academy = Academy()
         first_academy.name = 'Computer Science'
         first_academy.save()
 
-        second_academy = Academy(code='se')
+        second_academy = Academy()
         second_academy.name = 'Software Engineering'
         second_academy.save()
 
@@ -24,7 +24,7 @@ class AcademyModelTest(TestCase):
 
 class NewsModelTest(TestCase):
     def test_can_save_and_retriving_news(self):
-        academy_ = Academy(code='cs')
+        academy_ = Academy()
         academy_.name = 'Computer Science'
         academy_.save()
 
@@ -46,7 +46,7 @@ class NewsModelTest(TestCase):
         # second_saved_news = saved_news[1]
 class CommentModelTest(TestCase):
     def test_can_save_and_retriving_comments(self):
-        academy_ = Academy.objects.create(code='cs')
+        academy_ = Academy.objects.create()
         news_ = News.objects.create(academy=academy_)
         student_info_ = StudentInfo.objects.create(studentID='0000000000000')
         comment_ = NewsComment.objects.create(news=news_, studentInfo=student_info_)

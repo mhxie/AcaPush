@@ -17,7 +17,7 @@ class CommentFormTest(TestCase):
         self.assertEqual(form.errors['content'], [EMPTY_INPUT_ERROR])
 
     def test_form_save_handles_saving_to_a_news(self):
-        academy_ = Academy.objects.create(code='cs')
+        academy_ = Academy.objects.create()
         news_ = News.objects.create(academy=academy_)
         student_ = StudentInfo.objects.create(studentID='2014141466666')
         form = CommentForm(data={'content': 'This is a comment',

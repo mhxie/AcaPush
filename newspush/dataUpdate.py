@@ -4,7 +4,8 @@ import traceback
 from django.db import models
 
 
-# insert news or noice json file 
+
+# insert news or noice json file
 def data_insert(data_name):
 	# get information
 	try:
@@ -38,15 +39,15 @@ def data_insert(data_name):
 		except Exception as e:
 			traceback.print_exc()
 			return
-		
+
 	elif table=="notice":
 		file_path = path + "/Notice"
 		try:
-			models.Notice.objects.create(academy=academy,title=title,time=time,sourceURL=file_path_name,originURL=originURL,) 
+			models.Notice.objects.create(academy=academy,title=title,time=time,sourceURL=file_path_name,originURL=originURL,)
 		except Exception as e:
 			traceback.print_exc()
 			return
-		try:	
+		try:
 			ID = models.notice.objects.get(originURL=originURL)
 		except Exception as e:
 			traceback.print_exc()
@@ -64,7 +65,7 @@ def data_insert(data_name):
 	data.close()
 
 
-# insert news comment json file 
+# insert news comment json file
 def comment_indert(data_name):
 	# get information
 	try:
@@ -102,7 +103,3 @@ def init_academy(data_name):
 			address = s["academy"][i]["address"]
 			models.Academy.objects.create(code=code,name=name,address=address)
 	data.close()
-
-
-
-

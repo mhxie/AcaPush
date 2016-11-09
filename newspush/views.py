@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden
 from newspush.models import News, NewsComment, StudentInfo
 from newspush.forms import CommentForm, LoginForm
-from django.core.exceptions import ValidationError, OperationalError
+from django.core.exceptions import ValidationError
+from django.db.utils import OperationalError
 from django.core import serializers
 import requests
 import json
@@ -31,7 +32,7 @@ def fetch_comments(request, news_id):
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 def login(request):
-    if request.method = 'POST':
+    if request.method == 'POST':
         form = LoginForm(request.POST)
         if not form.is_valid():
             return HttpResponseNotFound
@@ -60,48 +61,51 @@ def login(request):
 def fetch_news(request,aca_id,d):
     aca_id=request.GET['aca_id']
     d=request.GET['d']
-    
+
     try:
-        response_data=serializers.serialize("json",News.objects.filter(academy=aca_id,date<=d))
+        pass
+        # response_data=serializers.serialize("json",News.objects.filter(academy=aca_id,date<=d))
     except OperationalError:
         return HttpResponseNotFound
-                                        
+
     return HttpResponse(json.dumps(response_data),content_type="application/json")
 
 def fetch_notice(request,aca_id,d):
-    aca_id=request.GET['aca_id']
-    d=request.GET['d']
-    
+    aca_id = request.GET['aca_id']
+    d = request.GET['d']
+
     try:
-        response_data=serializers.serialize("json",Notice.objects.filter(academy=aca_id,date<=d))
+        pass
+        # response_data=serializers.serialize("json",Notice.objects.filter(academy=aca_id,date<=d))
     except OperationalError:
         return HttpResponseNotFound
-                                        
+
     return HttpResponse(json.dumps(response_data),content_type="application/json")
 
 def search_news(request,keyword,aca_id,d):
-    keyword=request.GET['keyword']                                    
+    keyword=request.GET['keyword']
     aca=request.GET['academy']
     d=request.GET['date']
-                           
+
     try:
-        response_data=serializers.serialize("json",News.objects.filter(academy=aca_id,date<=d))
+        pass # Cannot pass
+        # response_data=serializers.serialize("json",News.objects.filter(academy=aca_id,date<=d))
     except OperationalError:
         return HttpResponseNotFound
-                                        
+
     return HttpResponse(json.dumps(response_data),content_type="application/json")
-                                        
+
 
 def search_notice(request,keyword,aca_id,d):
-    keyword=request.GET['keyword']                                    
+    keyword=request.GET['keyword']
     aca=request.GET['academy']
     d=request.GET['date']
 
     try:
-        response_data=serializers.serialize("json",Notice.objects.filter(academy=aca_id,date<=d))
+        pass # Cannot pass
+        # response_data=serializers.serialize("json",Notice.objects.filter(academy=aca_id,date<=d))
     except OperationalError:
         return HttpResponseNotFound
-                                        
     return HttpResponse(json.dumps(response_data),content_type="application/json")
 
 # To-Do
