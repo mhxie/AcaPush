@@ -79,21 +79,24 @@ def fetch_notice(request,aca_id,d):
                                         
     return HttpResponse(json.dumps(response_data),content_type="application/json")
 
-def search(request,flag,keyword,aca_id,d):
-    flag=request.GET['flag']
+def search_news(request,keyword,aca_id,d):
     keyword=request.GET['keyword']                                    
     aca=request.GET['academy']
     d=request.GET['date']
-
-    if flag==0  #news                              
+                           
     try:
         response_data=serializers.serialize("json",News.objects.filter(academy=aca_id,date<=d))
     except OperationalError:
         return HttpResponseNotFound
                                         
     return HttpResponse(json.dumps(response_data),content_type="application/json")
+                                        
 
-    else if flag==1  #notice
+def search_notice(request,keyword,aca_id,d):
+    keyword=request.GET['keyword']                                    
+    aca=request.GET['academy']
+    d=request.GET['date']
+
     try:
         response_data=serializers.serialize("json",Notice.objects.filter(academy=aca_id,date<=d))
     except OperationalError:
