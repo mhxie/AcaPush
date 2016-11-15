@@ -26,7 +26,6 @@ from newspush.views import search_notice
 
 
 urlpatterns = [
-	#  url(r'^admin/$', admin.site.urls), # 有bug，@贾舟帆
 	 url(r'^comments/commit/(\d{8})/(\d{13})$', commit_comment, name='commit_comment'), #upload the comments to the server
          url(r'^comments/(\d{8})/$', fetch_comments, name='fetch_comments'), #return the news of different academy
          url(r'^login/$',login,name='login'),

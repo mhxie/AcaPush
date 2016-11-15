@@ -5,7 +5,7 @@ from newspush.forms import CommentForm, LoginForm
 from django.core.exceptions import ValidationError
 from django.db.utils import OperationalError
 from django.core import serializers
-import requests
+#import requests #cannot import
 import json
 # Create your views here.
 
@@ -73,7 +73,6 @@ def fetch_news(request,aca_id,d):
 def fetch_notice(request,aca_id,d):
     aca_id = request.GET['aca_id']
     d = request.GET['d']
-
     try:
         pass
         # response_data=serializers.serialize("json",Notice.objects.filter(academy=aca_id,date<=d))
