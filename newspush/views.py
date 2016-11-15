@@ -2,31 +2,36 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden
 from newspush.models import News, NewsComment, StudentInfo
 from newspush.forms import CommentForm, LoginForm
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.db.utils import OperationalError
 from django.core import serializers
-#import requests #cannot import
+import requests
 import json
 # Create your views here.
 
 def commit_comment(request, news_id, stu_id):
     try:
         news_ = News.objects.get(id=news_id)
+    except ObjectDoesNotExist:
+        return HttpResponseNotFound('Error news id\n')
+    try:
         student_ = StudentInfo.objects.get(studentID=stu_id)
-    except OperationalError:
-        return HttpResponseNotFound
+    except ObjectDoesNotExist:
+        return HttpResponseForbidden('Student id not recorded.\n')
     if request.method == 'POST':
-        form = CommdeentForm(data=request.POST)
+        form = CommentForm(data=request.POST)
         if form.is_valid():
             form.save(for_news=news_, for_stu_info=student_)
             html = "<html><body>Comment succeed.</body></html>"
             return HttpResponse(html)
+        else:
+            return HttpResponse('Form invalid\n')
 
 def fetch_comments(request, news_id):
     try:
         news_ = News.objects.get(id=news_id)
-    except OperationalError:
-        return HttpResponseNotFound
+    except ObjectDoesNotExist:
+        return HttpResponseNotFound('Error news id\n')
     returned_comments = NewsComment.objects.filter(news=news_)
     response_data = serializers.serialize('json', returned_comments)
     return HttpResponse(json.dumps(response_data), content_type="application/json")

@@ -21,6 +21,7 @@ class CommentForm(forms.models.ModelForm):
         self.instance.studentInfo = for_stu_info
         return super().save()
 
+# This form is written for login test, e
 class LoginForm(forms.Form):
     scu_id = forms.CharField(max_length=13, min_length=13,
                              error_messages={

@@ -5,6 +5,8 @@ from django.template.loader import render_to_string
 from django.utils.html import escape
 from unittest import skip
 
+from newspush.models import StudentInfo, News, Academy, NewsComment
+
 class NewsAcquisitionViewTest(TestCase):
     def test_can_fetch_news_list_by_time(self):
         pass
@@ -18,10 +20,44 @@ class NewsAcquisitionViewTest(TestCase):
     def test_can_fetch_specific_news(self):
         pass
 
-class CommentsViewTest(TestCase):
-    def test_can_commit_comment_by_news_id(self):
-        pass
+class CommentCommitViewTest(TestCase):
+    def get_test_comment(self):
+        return {
+            'content': 'this is a comment for test.',
+            'ip': '8.8.8.8',
+        }
+    def test_can_commit_and_save_a_comment(self):
+        academy_ = Academy.objects.create()
+        news_ = News.objects.create(academy=academy_)
+        stu_ = StudentInfo.objects.create(studentID='2014141466666')
+        response = self.client.post(
+            '/comments/commit/%d/%s/' % (news_.id, stu_.studentID),
+            data=self.get_test_comment()
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(NewsComment.objects.count(), 1)
+        new_comment = NewsComment.objects.first()
+        self.assertEqual(new_comment.content, self.get_test_comment()['content'])
+        self.assertEqual(new_comment.ip, self.get_test_comment()['ip'])
 
+    def test_cannot_commit_comment_with_wrong_news_id(self):
+        stu_ = StudentInfo.objects.create(studentID='2014141466666')
+        response = self.client.post(
+            '/comments/commit/123/%s/' % (stu_.studentID,),
+            data=self.get_test_comment()
+        )
+        self.assertEqual(response.status_code, 404)
+    def test_cannot_commit_comment_with_wrong_student_id(self):
+        academy_ = Academy.objects.create()
+        news_ = News.objects.create(academy=academy_)
+        response = self.client.post(
+            '/comments/commit/%d/2014141466666/' % (news_.id, ),
+            data=self.get_test_comment()
+        )
+        self.assertEqual(response.status_code, 403)
+
+
+class CommentsAcquisitionViewTest(TestCase):
     def test_can_fetch_comment_by_news_id(self):
         pass
 
