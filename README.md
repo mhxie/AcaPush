@@ -21,13 +21,19 @@
 	* 部分视图和路由代码的编写[up to Zhoufan Jia, completed]
 	* 数据库插入新闻通知、初始化学院表代码，以及爬虫组数据交互格式[up to Zhijing Wu, completed]
 	* 部分单元测试和视图代码编写[up to Minghao Xie, completed]
-* 教学周第十周[Current week]
-	* 完善并改进现有代码
-* 教学周第十一周 - 第十二周
+* 教学周第十周
+	* 添加视图测试，完成基本的部署[up to Minghao Xie, completed]
+	* 接入爬虫组数据[up to Zhijing Wu, completed]
+	* 完成json测试服务器的编写，将路由和视图改通[up to Zhoufan Jia, completed]
+* 教学周第十一周[Current week]
+	* 完成剩余视图编写[up to Zhoufan Jia, not completed]
+	* 完成剩余视图测试编写[up to Minghao Xie, not completed]
+	* 修改完善后端数据[up to Zhijing Wu, not completed]
+* 教学周第十二周
 	* 和其他小组协商改进接口
 	* 完成所有单元测试
 * 教学周第十二周 - 第十四周  
-	* 项目上线
+	* 项目上线、部署
 	* 对项目进行回顾总结
 
 ## TO-DO
