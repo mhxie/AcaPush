@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidde
 from newspush.models import News, NewsComment, StudentInfo
 from newspush.forms import CommentForm, LoginForm
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from django.views.decorators.http import require_GET
 from django.db.utils import OperationalError
 from django.core import serializers
 import requests
@@ -27,13 +28,20 @@ def commit_comment(request, news_id, stu_id):
         else:
             return HttpResponse('Form invalid\n')
 
+@require_GET
 def fetch_comments(request, news_id):
     try:
         news_ = News.objects.get(id=news_id)
     except ObjectDoesNotExist:
         return HttpResponseNotFound('Error news id\n')
     returned_comments = NewsComment.objects.filter(news=news_)
-    response_data = serializers.serialize('json', returned_comments)
+    response_data = serializers.serialize('json', returned_comments,
+                                        #   fields=(
+                                        #     'studentInfo',
+                                        #     'content',
+                                        #     'time',
+                                        #     'ip')
+                                            )
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 def login(request):

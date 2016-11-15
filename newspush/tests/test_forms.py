@@ -22,7 +22,6 @@ class CommentFormTest(TestCase):
         student_ = StudentInfo.objects.create(studentID='2014141466666')
         form = CommentForm(data={'content': 'This is a comment',
                                  'ip': '127.0.0.1'})
-
         self.assertTrue(form.is_valid())
         new_comment = form.save(for_news=news_, for_stu_info=student_)
         self.assertEqual(new_comment, NewsComment.objects.first())
