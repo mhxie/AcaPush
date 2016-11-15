@@ -1,0 +1,30 @@
+{
+    "academy" : [ {
+      "address" : "http://www.sculj.cn",
+      "name" : "文新学院"
+    }, {
+      "address" : "http://sesu.scu.edu.cn",
+      "name" : "经济学院"
+    }, {
+      "address" : "http://cs.scu.edu.cn",
+      "name" : "计算机学院"
+    }, {
+      "address" : "http://news.scu.edu.cn",
+      "name" : "川大在线"
+    }, {
+      "address" : "http://math.scu.edu.cn",
+      "name" : "数学学院"
+    }, {
+      "address" : "http://seei.scu.edu.cn",
+      "name" : "电气信息学院"
+    }, {
+      "address" : "http://flc2.scu.edu.cn",
+      "name" : "外国语学院"
+    }, {
+      "address" : "http://jwc.scu.edu.cn",
+      "name" : "教务处"
+    }, {
+      "address" : "http://law.scu.edu.cn",
+      "name" : "法学院"
+    } ]
+  }
