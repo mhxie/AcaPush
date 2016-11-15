@@ -1,0 +1,62 @@
+{
+  "type" : "succ",
+  "result" : {
+    "sources" : [ {
+      "name" : "文新学院 - 学院动态",
+      "index" : "http://www.sculj.cn",
+      "school" : "文新学院"
+    }, {
+      "name" : "经济学院 - 学院新闻",
+      "index" : "http://sesu.scu.edu.cn",
+      "school" : "经济学院"
+    }, {
+      "name" : "经济学院 - 学院公告",
+      "index" : "http://sesu.scu.edu.cn",
+      "school" : "经济学院"
+    }, {
+      "name" : "计算机学院 - 学术看板",
+      "index" : "http://cs.scu.edu.cn",
+      "school" : "计算机学院"
+    }, {
+      "name" : "计算机学院 - 学院通知",
+      "index" : "http://cs.scu.edu.cn",
+      "school" : "计算机学院"
+    }, {
+      "name" : "计算机学院 - 学院新闻",
+      "index" : "http://cs.scu.edu.cn",
+      "school" : "计算机学院"
+    }, {
+      "name" : "计算机学院 - 访谈录",
+      "index" : "http://cs.scu.edu.cn",
+      "school" : "计算机学院"
+    }, {
+      "name" : "川大在线",
+      "index" : "http://news.scu.edu.cn",
+      "school" : "川大在线"
+    }, {
+      "name" : "数学学院 - 学院新闻",
+      "index" : "http://math.scu.edu.cn",
+      "school" : "数学学院"
+    }, {
+      "name" : "电气信息学院 - 学院通知",
+      "index" : "http://seei.scu.edu.cn",
+      "school" : "电气信息学院"
+    }, {
+      "name" : "外国语学院 - 学院公告",
+      "index" : "http://flc2.scu.edu.cn",
+      "school" : "外国语学院"
+    }, {
+      "name" : "教务处 - 通知",
+      "index" : "http://jwc.scu.edu.cn",
+      "school" : "教务处"
+    }, {
+      "name" : "法学院 - 学院新闻",
+      "index" : "http://law.scu.edu.cn",
+      "school" : "法学院"
+    }, {
+      "name" : "法学院 - 学院公告",
+      "index" : "http://law.scu.edu.cn",
+      "school" : "法学院"
+    } ]
+  }
+}
