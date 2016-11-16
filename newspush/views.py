@@ -76,8 +76,8 @@ def fetch_news(request,aca_id,d):
     d=request.GET['d']
 
     try:
-        pass
-        # response_data=serializers.serialize("json",News.objects.filter(academy=aca_id,date<=d))
+        tmp=serializers.serialize(News.objects.filter(academy=aca_id))
+		response_data=serializers.serialize("json",tmp.filter(data_gte=d))
     except OperationalError:
         return HttpResponseNotFound
 
@@ -87,8 +87,8 @@ def fetch_notice(request,aca_id,d):
     aca_id = request.GET['aca_id']
     d = request.GET['d']
     try:
-        pass
-        # response_data=serializers.serialize("json",Notice.objects.filter(academy=aca_id,date<=d))
+        tmp=serializers.serialize(Notice.objects.filter(academy=aca_id))
+		response_data=serializers.serialize("json",tmp.filter(data_gte=d))
     except OperationalError:
         return HttpResponseNotFound
 
@@ -100,8 +100,9 @@ def search_news(request,keyword,aca_id,d):
     d=request.GET['date']
 
     try:
-        pass # Cannot pass
-        # response_data=serializers.serialize("json",News.objects.filter(academy=aca_id,date<=d))
+        tmp=serializers.serialize(News.objects.filter(academy=aca_id))
+		tmp1=serializers.serialize(tmp.filter(data_gte=d))
+		response_data=serializers.serialize("json",tmp1.filter(content_contains=keyword))
     except OperationalError:
         return HttpResponseNotFound
 
@@ -114,8 +115,9 @@ def search_notice(request,keyword,aca_id,d):
     d=request.GET['date']
 
     try:
-        pass # Cannot pass
-        # response_data=serializers.serialize("json",Notice.objects.filter(academy=aca_id,date<=d))
+        tmp=serializers.serialize(Notice.objects.filter(academy=aca_id))
+		tmp1=serializers.serialize(tmp.filter(data_gte=d))
+		response_data=serializers.serialize("json",tmp1.filter(content_contains=keyword))
     except OperationalError:
         return HttpResponseNotFound
     return HttpResponse(json.dumps(response_data),content_type="application/json")
