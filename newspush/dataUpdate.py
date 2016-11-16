@@ -12,7 +12,9 @@ def data_insert(data):
 	# get information
 	try:
 		#data = open(data_name)
-		s = json.load(data)
+		# s = json.loads(data)
+		s = data
+		# print(s)
 		academy = s["academy"]
 		title = s["title"]
 		time = s["time"]
@@ -23,16 +25,28 @@ def data_insert(data):
 		traceback.print_exc()
 		return
 
+
+	# s = {}
+	# originURL = "originURL"
+	# title = "title"
+	# content = "content"
+	# time = "time"
+	# academy = "academy"
+	# category = "category"
+
 	# create dir, we will do this in the begining
 	table = category
 	path = os.path.abspath('..')+"/src"
 	#os.makedirs(path)
 
+	file_path = ""
+	ID = 0
 	# insert information into database
 	if table=="news":
 		file_path = path + "/News"
 		try:
 			models.News.objects.create(academy=academy,title=title,time=time,sourceURL=file_path_name,originURL=originURL)
+			print("succ")
 		except Exception as e:
 			traceback.print_exc()
 			return
@@ -46,6 +60,7 @@ def data_insert(data):
 		file_path = path + "/Notice"
 		try:
 			models.Notice.objects.create(academy=academy,title=title,time=time,sourceURL=file_path_name,originURL=originURL,)
+			print("succ")
 		except Exception as e:
 			traceback.print_exc()
 			return
@@ -64,7 +79,7 @@ def data_insert(data):
 	else:
 		f.write(content)
 		f.close()
-	data.close()
+	# data.close()
 
 
 # insert news comment json file
@@ -91,10 +106,11 @@ def comment_indert(data_name):
 
 # init academy json file
 def init_academy():
-	path = os.path.abspath('..') 
+	# path = os.path.abspath('..') 
+	path = "D:/resp/AcaPush"
 	data = open(path+"/src/academy.json");
 	try:
-		data = open(data_name)
+		# data = open(data_name)
 		s = json.load(data)
 	except Exception as e:
 		traceback.print_exc()
@@ -128,34 +144,60 @@ def listsources():
 
 # use getnews commend to get information
 # sava them into file system
-# not completeds
 def getdata():
-	def getdata():
-	path = os.path.abspath('..') 
-	file = open(path+"/src/listsources.json");
-	li = open(file)
-	s = json.load(li)	
+	# get listsources
+	# path = os.path.abspath('..') 
+	# file_name = path+"/src/listsources.json"
+	file_name = "D:/resp/AcaPush/src/listsources.json"
+	li = open(file_name)
+	js = json.load(li)
+	s = js["result"]
+	# print(s)	
 	length1 = len(s["sources"])
+	count = 0
 
+	# get information for each element
 	for i in range(0, length1):
-		academy = s["sources"][i][school]
-		select = s["sources"][i][name]
-		cmd = """{"type":"getnews","source":\""""+select+"\"}"
-		get = runjar(cmd)
-		
-		length2 = len(get["result"][0]["news"])
+		academy = s["sources"][i]["school"]
+		select = s["sources"][i]["name"]
+		# check it is news or notice
 		if select.find("通知") != -1:
-			category = "notice";
-		if select.find("新闻") != -1:
-			category = "news"
+			category = "Notice"
+		elif select.find("新闻") != -1:
+			category = "News"
+		else:
+			continue
+		# get news or notices by running jar files
+		cmd = """{"type":"getnews","source":\""""+select+"\"}"
+		print(cmd)
+		g = runjar(cmd)
+		# print("lalala "+g+" lalla")
+		get = json.loads(g)
+		if(get["type"] == "err"):
+			print("err in getnews commend when get "+select)
+			continue
+		# save data	
+		length2 = len(get["result"]["news"])
+		print("get "+str(length2)+" "+select+" successfully!")
 		for i in range(0,length2):
 			# create a json file
 			info = {}
-			info["originURL"] = s["result"][0]["news"][i]["url"]
-			info["title"] = s["result"][0]["news"][i]["title"]
-			info["content"] = s["result"][0]["news"][i]["content"]
-			info["time"] = s["result"][0]["news"][i]["date"]
+			info["originURL"] = get["result"]["news"][i]["url"]
+			info["title"] = get["result"]["news"][i]["title"]
+			info["content"] = get["result"]["news"][i]["html"]
+			info["time"] = get["result"]["news"][i]["date"]
 			info["academy"] = academy
 			info["category"] = category
-			# inset into database
 			data_insert(info)
+			# # save test
+			# file2_name = path+"/src/"+category+"/"+str(count)+".json"
+			# # print(file2_name)
+			# file2 = open(file2_name,"w")
+			# file2.write(str(info))
+			# file2.close()
+			# count += 1
+			#print(info)
+			# inset into database
+
+if __name__ == '__main__':
+	getdata()

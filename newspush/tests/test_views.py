@@ -75,8 +75,8 @@ class CommentsAcquisitionViewTest(TestCase):
         date_time = NewsComment.objects.first().time.isoformat()
 
         response = self.client.get('/comments/%d/' % (news_.id, ))
-        print(date_time)
-        print(response.content)
+        # print(date_time)
+        # print(response.content)
         self.assertEqual(response.status_code, 200)
         # print(response.content)
         # print(NewsComment.objects.first().time)
@@ -95,7 +95,7 @@ class CommentsAcquisitionViewTest(TestCase):
                     }
 
         actual_json = json.loads(response.content.decode('utf8'))
-        del actual_json['fields']['time']
+        # del actual_json['fields']['time']
         # for key, value in actual_json:
         #     assertEqual(true_json[key], value)
 
