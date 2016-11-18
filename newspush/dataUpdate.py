@@ -3,7 +3,8 @@ import json
 import shlex
 import traceback
 import subprocess
-from django.db import models
+from lalalaapp.models import * 
+# from django.db import models
 
 
 
@@ -25,7 +26,9 @@ def data_insert(data):
 		traceback.print_exc()
 		return
 
-
+	time = '2016-11-19'
+	print("s is ")
+	print(s)
 	# s = {}
 	# originURL = "originURL"
 	# title = "title"
@@ -36,42 +39,49 @@ def data_insert(data):
 
 	# create dir, we will do this in the begining
 	table = category
-	path = os.path.abspath('..')+"/src"
+	path = os.path.abspath('.')+"/src"
 	#os.makedirs(path)
 
 	file_path = ""
 	ID = 0
 	# insert information into database
-	if table=="news":
+	print("table"+table)
+	if table=="News":
 		file_path = path + "/News"
 		try:
-			models.News.objects.create(academy=academy,title=title,time=time,sourceURL=file_path_name,originURL=originURL)
+			News.objects.create(academy=academy,title=title,time=time,sourceURL=file_path,originURL=originURL)
 			print("succ")
 		except Exception as e:
 			traceback.print_exc()
 			return
 		try:
-			ID = models.News.objects.get(originURL=originURL).id()
+			re = News.objects.filter(originURL=originURL)
+			ID = re[0].id
+			print("ID is ")
+			print(ID)
 		except Exception as e:
 			traceback.print_exc()
 			return
 
-	elif table=="notice":
+	elif table=="Notice":
 		file_path = path + "/Notice"
 		try:
-			models.Notice.objects.create(academy=academy,title=title,time=time,sourceURL=file_path_name,originURL=originURL,)
+			Notice.objects.create(academy=academy,title=title,time=time,sourceURL=file_path,originURL=originURL,)
 			print("succ")
 		except Exception as e:
 			traceback.print_exc()
 			return
 		try:
-			ID = models.notice.objects.get(originURL=originURL)
+			re = notice.objects.filter(originURL=originURL)
+			ID = re[0].id
 		except Exception as e:
 			traceback.print_exc()
 			return
 
 	# save the information to file system
 	try:
+		print("file_path is "+file_path)
+		print("")
 		f = open(file_path + "/" + str(ID) + ".json","a+")
 	except Exception as e:
 		traceback.print_exc()
@@ -81,33 +91,10 @@ def data_insert(data):
 		f.close()
 	# data.close()
 
-
-# insert news comment json file
-def comment_indert(data_name):
-	# get information
-	try:
-		data = open(data_name)
-		s = json.load(data)
-		news = s["news"]
-		studentInfo = s["studentInfo"]
-		content = s["content"]
-		ip = s["ip"]
-	except Exception as e:
-		traceback.print_exc()
-		return
-
-	# insert news comment into database
-	try:
-		models.NewsComment.objects.create(news=news,studentInfo=studentInfo,content=content,time=time,ip=ip)
-	except Exception as e:
-		traceback.print_exc()
-		return
-	data.close()
-
 # init academy json file
 def init_academy():
-	# path = os.path.abspath('..') 
-	path = "D:/resp/AcaPush"
+	path = os.path.abspath('.') 
+	# path = "D:/resp/AcaPush"
 	data = open(path+"/src/academy.json");
 	try:
 		# data = open(data_name)
@@ -121,7 +108,7 @@ def init_academy():
 #			code = s["academy"][i]["code"]
 			name = s["academy"][i]["name"]
 			address = s["academy"][i]["address"]
-			models.Academy.objects.create(name=name,address=address)
+			Academy.objects.create(name=name,address=address)
 	data.close()
 
 # run rhe jar files to get sources
@@ -136,7 +123,7 @@ def runjar(input):
 def listsources():
 	cmd = """{"type":"listsources"}"""
 	content = runjar(cmd)
-	path = os.path.abspath('..')
+	path = os.path.abspath('.')
 	f = open(path+"/src/listsources.json","w")
 	f.write(content)
 	f.close()
@@ -146,9 +133,9 @@ def listsources():
 # sava them into file system
 def getdata():
 	# get listsources
-	# path = os.path.abspath('..') 
-	# file_name = path+"/src/listsources.json"
-	file_name = "D:/resp/AcaPush/src/listsources.json"
+	path = os.path.abspath('.') 
+	file_name = path+"/src/listsources.json"
+	# file_name = "D:/resp/AcaPush/src/listsources.json"
 	li = open(file_name)
 	js = json.load(li)
 	s = js["result"]
@@ -160,6 +147,7 @@ def getdata():
 	for i in range(0, length1):
 		academy = s["sources"][i]["school"]
 		select = s["sources"][i]["name"]
+		print("select is "+select)
 		# check it is news or notice
 		if select.find("通知") != -1:
 			category = "Notice"
@@ -171,7 +159,7 @@ def getdata():
 		cmd = """{"type":"getnews","source":\""""+select+"\"}"
 		print(cmd)
 		g = runjar(cmd)
-		# print("lalala "+g+" lalla")
+		print("lalala "+g+" lalla")
 		get = json.loads(g)
 		if(get["type"] == "err"):
 			print("err in getnews commend when get "+select)
@@ -188,6 +176,8 @@ def getdata():
 			info["time"] = get["result"]["news"][i]["date"]
 			info["academy"] = academy
 			info["category"] = category
+			print("info is ")
+			print(info)
 			data_insert(info)
 			# # save test
 			# file2_name = path+"/src/"+category+"/"+str(count)+".json"
@@ -199,5 +189,5 @@ def getdata():
 			#print(info)
 			# inset into database
 
-if __name__ == '__main__':
-	getdata()
+# if __name__ == '__main__':
+# 	getdata()

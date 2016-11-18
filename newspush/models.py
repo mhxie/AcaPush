@@ -3,23 +3,26 @@ from django.db import models
 # Create your models here.
 
 class Academy(models.Model):
-    # code = models.CharField(max_length=255)
     name = models.CharField(max_length=255, default="SCU")
     address = models.CharField(max_length=255, default="www.scu.edu.cn")
 
 class News(models.Model):
-    academy = models.ForeignKey(Academy, default=None)
+    # academy = models.ForeignKey(Academy, default=None)
+    academy = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     time = models.DateTimeField(null=True)
+    # time = models.CharField(max_length=255)
     sourceURL = models.CharField(max_length=255)
     picURL_Path = models.CharField(max_length=255)
     originURL = models.CharField(max_length=255)
     accessNum = models.IntegerField(default=0)
 
 class Notice(models.Model):
-    academy = models.ForeignKey(Academy, default=None)
-    title = models.CharField(max_length=255)
+    # academy = models.ForeignKey(Academy, default=None)
+    academy = models.CharField(max_length=255)
+    #title = models.CharField(max_length=255)
     time = models.DateTimeField(null=True)
+    # time = models.CharField(max_length=255)
     sourceURL = models.CharField(max_length=255)
     originURL = models.CharField(max_length=255)
     accessNum = models.IntegerField(default=0)
