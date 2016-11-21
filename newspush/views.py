@@ -82,6 +82,7 @@ def fetch_news(request,aca_id,d):
         return HttpResponseNotFound
 
     return HttpResponse(json.dumps(response_data),content_type="application/json")
+	#academy title time sourceURL picURL_Path originURL accessNum
 
 def fetch_notice(request,aca_id,d):
     aca_id = request.GET['aca_id']
@@ -93,6 +94,7 @@ def fetch_notice(request,aca_id,d):
         return HttpResponseNotFound
 
     return HttpResponse(json.dumps(response_data),content_type="application/json")
+	#academy title time sourceURL picURL_Path originURL accessNum
 
 def search_news(request,keyword,aca_id,d):
     keyword=request.GET['keyword']
@@ -107,7 +109,7 @@ def search_news(request,keyword,aca_id,d):
         return HttpResponseNotFound
 
     return HttpResponse(json.dumps(response_data),content_type="application/json")
-
+	#academy title time sourceURL picURL_Path originURL accessNum
 
 def search_notice(request,keyword,aca_id,d):
     keyword=request.GET['keyword']
@@ -121,6 +123,7 @@ def search_notice(request,keyword,aca_id,d):
     except OperationalError:
         return HttpResponseNotFound
     return HttpResponse(json.dumps(response_data),content_type="application/json")
+	#academy title time sourceURL picURL_Path originURL accessNum
 
 # To-Do
 # 1. 完成视图测试
