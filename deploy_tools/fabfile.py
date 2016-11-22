@@ -42,10 +42,10 @@ def _update_virtualenv(source_folder):
         virtualenv_folder, source_folder
     ))
 
-# def _update_static_files(source_folder):
-#     run('cd %s && ../virtualenv/bin/python3 manage.py collectstatic --noinput' % (
-#         source_folder
-#     ))
+def _update_static_files(source_folder):
+    run('cd %s && ../virtualenv/bin/python3 manage.py collectstatic --noinput' % (
+        source_folder
+    ))
 
 def _update_database(source_folder):
     run('cd %s && ../virtualenv/bin/python3 manage.py migrate --noinput' % (
@@ -61,14 +61,15 @@ def deploy(domain_name):
     _get_latest_source(source_folder)
     _update_settings(source_folder, domain_name)
     _update_virtualenv(source_folder)
-    # _update_static_files(source_folder)
+    _update_static_files(source_folder)
     _update_database(source_folder)
 
-
+# Before deploy
 # Replace REPO_URL
 # Replace settings_path
 # Replace gunicorn-upstart unix
 
+# cd /sites/xmhtest.cn/source
 # sed "s/SITENAME/xmhtest.cn/g" deploy_tools/nginx.template.conf | sudo tee /etc/nginx/sites-available/xmhtest.cn
 # sudo ln -s ../sites-available/xmhtest.cn /etc/nginx/sites-enabled/xmhtest.cn
 # sed "s/SITENAME/xmhtest.cn/g" deploy_tools/gunicorn-upstart.template.conf | sudo tee /etc/init/gunicorn-xmhtest.cn.conf

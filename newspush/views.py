@@ -12,12 +12,31 @@ import re
 import datetime
 # Create your views here.
 
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+
+
+def handler404(request):
+    response = render_to_response('404.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 404
+    return response
+
+
+# def handler500(request):
+#     response = render_to_response('500.html', {},
+#                                   context_instance=RequestContext(request))
+#     response.status_code = 500
+#     return response
+
+
 # 验证需要改进
 def commit_comment(request, news_id, stu_id):
     try:
         news_ = News.objects.get(id=news_id)
     except ObjectDoesNotExist:
-        return HttpResponseNotFound('Error news id\n')
+        # return HttpResponseNotFound('Error news id\n')
+        return handler404(request)
     try:
         student_ = StudentInfo.objects.get(studentID=stu_id)
     except ObjectDoesNotExist:
@@ -31,13 +50,17 @@ def commit_comment(request, news_id, stu_id):
             return HttpResponse(html)
         else:
             return HttpResponse('Form invalid\n')
+    else:
+        return handler404(request)
+
 
 @require_GET
 def fetch_comments(request, news_id):
     try:
         news_ = News.objects.get(id=news_id)
     except ObjectDoesNotExist:
-        return HttpResponseNotFound('Error news id\n')
+        # return HttpResponseNotFound('Error news id\n')
+        return handler404(request)
     returned_comments = NewsComment.objects.filter(news=news_)
     response_data = serializers.serialize('json', returned_comments,
                                         #   fields=(
@@ -85,6 +108,10 @@ def login(request):
                 raise HttpResponseNotFound('Unknown error.\n')
         else:
             raise HttpResponseForbidden('Wrong form.\n')
+    else:
+        # return HttpResponseNotFound('What are you doing?\n')
+        return handler404(request)
+
 
 def fetch_news(request,aca_id,d):
     try:
