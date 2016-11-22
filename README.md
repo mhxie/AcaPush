@@ -25,16 +25,17 @@
 	* 添加视图测试，完成基本的部署[up to Minghao Xie, completed]
 	* 接入爬虫组数据[up to Zhijing Wu, completed]
 	* 完成json测试服务器的编写，将路由和视图改通[up to Zhoufan Jia, completed]
-* 教学周第十一周[Current week]
-	* 完成剩余视图编写[up to Zhoufan Jia, not completed]
-	* 完成剩余视图测试编写[up to Minghao Xie, not completed]
-	* 修改完善后端数据[up to Zhijing Wu, not completed]
-* 教学周第十二周
+* 教学周第十一周
+	* 修改了获取与搜索的四个views[up to Zhoufan Jia, completed]
+	* 完成剩余视图测试编写以及云服务器的主要部署[up to Minghao Xie, completed]
+	* 修改完善后端数据[up to Zhijing Wu, completed]
+* 教学周第十二周[Current week]
 	* 和其他小组协商改进接口
 	* 完成所有单元测试
-* 教学周第十二周 - 第十四周  
-	* 项目上线、部署
+	* 后端数据整理
+* 教学周第十三周 - 第十四周  
 	* 对项目进行回顾总结
+	* 调整部署，修改bug
 
 ## TO-DO
 * 数据库设计（和爬虫组协商）[done]
@@ -43,4 +44,8 @@
 * 完成关键数据的流图[canceled]
 * 完善数据库设计[done]
 * 视图测试、数据库测试
-* 代码部署
+* 代码部署[Done]
+
+
+## 部署
+访问[主页](xmhtest.cn) 获得更多信息，后端数据尚未到位，目前只能得到404的返回:p

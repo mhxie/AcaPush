@@ -64,14 +64,19 @@ def deploy(domain_name):
     _update_static_files(source_folder)
     _update_database(source_folder)
 
-# Before deploy
+## Before deploy
 # Replace REPO_URL
 # Replace settings_path
 # Replace gunicorn-upstart unix
 
+## After first deploy
 # cd /sites/xmhtest.cn/source
 # sed "s/SITENAME/xmhtest.cn/g" deploy_tools/nginx.template.conf | sudo tee /etc/nginx/sites-available/xmhtest.cn
 # sudo ln -s ../sites-available/xmhtest.cn /etc/nginx/sites-enabled/xmhtest.cn
 # sed "s/SITENAME/xmhtest.cn/g" deploy_tools/gunicorn-upstart.template.conf | sudo tee /etc/init/gunicorn-xmhtest.cn.conf
 # sudo service nginx reload
 # sudo start gunicorn-xmhtest.cn
+
+## After future deploy
+# sudo service nginx reload
+# sudo restart gunicorn-xmhtest.cn
