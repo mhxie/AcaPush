@@ -103,6 +103,10 @@ class CommentsAcquisitionViewTest(TestCase):
         response = self.client.get('/comments/123/')
         self.assertEqual(response.status_code, 404)
 
+def LoginFormViewTest(TestCase):
+    def test_can_login(self):
+        pass
+
 class NoticesViewTest(TestCase):
     def test_can_fetch_notices_list_by_time(self):
         pass
