@@ -7,8 +7,8 @@ class Academy(models.Model):
     address = models.CharField(max_length=255, default="www.scu.edu.cn")
 
 class News(models.Model):
-    # academy = models.ForeignKey(Academy, default=None)
-    academy = models.CharField(max_length=255)
+    academy = models.ForeignKey(Academy, default=None)
+    # academy = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     time = models.DateTimeField(null=True)
     # time = models.CharField(max_length=255)
@@ -18,9 +18,9 @@ class News(models.Model):
     accessNum = models.IntegerField(default=0)
 
 class Notice(models.Model):
-    # academy = models.ForeignKey(Academy, default=None)
-    academy = models.CharField(max_length=255)
-    #title = models.CharField(max_length=255)
+    academy = models.ForeignKey(Academy, default=None)
+    #academy = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
     time = models.DateTimeField(null=True)
     # time = models.CharField(max_length=255)
     sourceURL = models.CharField(max_length=255)

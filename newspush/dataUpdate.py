@@ -1,5 +1,6 @@
 import os
 import json
+import time
 import shlex
 import traceback
 import subprocess
@@ -27,8 +28,6 @@ def data_insert(data):
 		return
 
 	time = '2016-11-19'
-	print("s is ")
-	print(s)
 	# s = {}
 	# originURL = "originURL"
 	# title = "title"
@@ -45,34 +44,42 @@ def data_insert(data):
 	file_path = ""
 	ID = 0
 	# insert information into database
-	print("table"+table)
+	ac = Academy.objects.get(name=academy)
+	
 	if table=="News":
+		dup = News.objects.filter(originURL=originURL)
+		if(len(dup)!=0):
+			print("this data exists now")
+			return
 		file_path = path + "/News"
 		try:
-			News.objects.create(academy=academy,title=title,time=time,sourceURL=file_path,originURL=originURL)
-			print("succ")
+			News.objects.create(academy=ac,title=title,time=time,sourceURL=file_path,originURL=originURL)
+			print("succ insert into database news")
 		except Exception as e:
 			traceback.print_exc()
 			return
 		try:
 			re = News.objects.filter(originURL=originURL)
 			ID = re[0].id
-			print("ID is ")
-			print(ID)
+			print("ID is "+str(ID))
 		except Exception as e:
 			traceback.print_exc()
 			return
 
 	elif table=="Notice":
+		dup = Notice.objects.filter(originURL=originURL)
+		if(len(dup)!=0):
+			print("this data exists now")
+			return
 		file_path = path + "/Notice"
 		try:
-			Notice.objects.create(academy=academy,title=title,time=time,sourceURL=file_path,originURL=originURL,)
-			print("succ")
+			Notice.objects.create(academy=ac,title=title,time=time,sourceURL=file_path,originURL=originURL,)
+			print("succ insert into database notice")
 		except Exception as e:
 			traceback.print_exc()
 			return
 		try:
-			re = notice.objects.filter(originURL=originURL)
+			re = Notice.objects.filter(originURL=originURL)
 			ID = re[0].id
 		except Exception as e:
 			traceback.print_exc()
@@ -81,13 +88,12 @@ def data_insert(data):
 	# save the information to file system
 	try:
 		print("file_path is "+file_path)
-		print("")
-		f = open(file_path + "/" + str(ID) + ".json","a+")
+		f = open(file_path + "/" + str(ID) + ".json","w+")
 	except Exception as e:
 		traceback.print_exc()
 		return
 	else:
-		f.write(content)
+		f.write(str(data))
 		f.close()
 	# data.close()
 
@@ -149,17 +155,17 @@ def getdata():
 		select = s["sources"][i]["name"]
 		print("select is "+select)
 		# check it is news or notice
-		if select.find("通知") != -1:
-			category = "Notice"
-		elif select.find("新闻") != -1:
+		if select.find("新闻") != -1:
 			category = "News"
+		elif select.find("通知") != -1:
+			category = "Notice"
 		else:
 			continue
 		# get news or notices by running jar files
 		cmd = """{"type":"getnews","source":\""""+select+"\"}"
 		print(cmd)
 		g = runjar(cmd)
-		print("lalala "+g+" lalla")
+		# print("lalala "+g+" lalla")
 		get = json.loads(g)
 		if(get["type"] == "err"):
 			print("err in getnews commend when get "+select)
@@ -176,8 +182,8 @@ def getdata():
 			info["time"] = get["result"]["news"][i]["date"]
 			info["academy"] = academy
 			info["category"] = category
-			print("info is ")
-			print(info)
+			# print("info is ")
+			# print(info)
 			data_insert(info)
 			# # save test
 			# file2_name = path+"/src/"+category+"/"+str(count)+".json"
@@ -189,5 +195,12 @@ def getdata():
 			#print(info)
 			# inset into database
 
-# if __name__ == '__main__':
-# 	getdata()
+# update every 5 min
+def timer(n):  
+    while True:  
+        getdata()  
+        time.sleep(n)
+
+if __name__ == '__main__':
+	t = 10*5
+	timer(t)
