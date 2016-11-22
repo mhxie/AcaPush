@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.views.decorators.http import require_GET
 from django.db.utils import OperationalError
 from django.core import serializers
-import requests
+#import requests
 import json
 # Create your views here.
 
@@ -77,9 +77,9 @@ def fetch_news(request,aca_id,d):
 
     try:
         tmp=serializers.serialize(News.objects.filter(academy=aca_id))
-		response_data=serializers.serialize("json",tmp.filter(data_gte=d))
-    except OperationalError:
-        return HttpResponseNotFound
+        response_data=serializers.serialize("json",tmp.filter(data__gte=d))
+    except ObjectDoesNotExist:
+        return HttpResponseNotFound('Error, object does not exsit\n')
 
     return HttpResponse(json.dumps(response_data),content_type="application/json")
 	#academy title time sourceURL picURL_Path originURL accessNum
@@ -89,9 +89,9 @@ def fetch_notice(request,aca_id,d):
     d = request.GET['d']
     try:
         tmp=serializers.serialize(Notice.objects.filter(academy=aca_id))
-		response_data=serializers.serialize("json",tmp.filter(data_gte=d))
-    except OperationalError:
-        return HttpResponseNotFound
+        response_data=serializers.serialize("json",tmp.filter(data__gte=d))
+    except ObjectDoesNotExist:
+        return HttpResponseNotFound('Error, object does not exsit\n')
 
     return HttpResponse(json.dumps(response_data),content_type="application/json")
 	#academy title time sourceURL picURL_Path originURL accessNum
@@ -103,12 +103,12 @@ def search_news(request,keyword,aca_id,d):
 
     try:
         tmp=serializers.serialize(News.objects.filter(academy=aca_id))
-		tmp1=serializers.serialize(tmp.filter(data_gte=d))
-		response_data=serializers.serialize("json",tmp1.filter(content_contains=keyword))
-    except OperationalError:
-        return HttpResponseNotFound
+        tmp1=serializers.serialize(tmp.filter(data__gte=d))
+        response_data=serializers.serialize("json",tmp1.filter(content__contains=keyword))
+    except ObjectDoesNotExist:
+        return HttpResponseNotFound('Error, object does not exsit\n')
 
-    return HttpResponse(json.dumps(response_data),content_type="application/json")
+    return HttpResponse(json.dumps(response_data),content__type="application/json")
 	#academy title time sourceURL picURL_Path originURL accessNum
 
 def search_notice(request,keyword,aca_id,d):
@@ -118,11 +118,11 @@ def search_notice(request,keyword,aca_id,d):
 
     try:
         tmp=serializers.serialize(Notice.objects.filter(academy=aca_id))
-		tmp1=serializers.serialize(tmp.filter(data_gte=d))
-		response_data=serializers.serialize("json",tmp1.filter(content_contains=keyword))
-    except OperationalError:
-        return HttpResponseNotFound
-    return HttpResponse(json.dumps(response_data),content_type="application/json")
+        tmp1=serializers.serialize(tmp.filter(data__gte=d))
+        response_data=serializers.serialize("json",tmp1.filter(content__contains=keyword))
+    except ObjectDoesNotExist:
+        return HttpResponseNotFound('Error, object does not exsit\n')
+    return HttpResponse(json.dumps(response_data),content__type="application/json")
 	#academy title time sourceURL picURL_Path originURL accessNum
 
 # To-Do
