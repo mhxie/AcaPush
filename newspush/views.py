@@ -176,5 +176,5 @@ def search_notice(request,keyword,aca_id,d):
 
 # To-Do
 # 1. 完成视图测试
-# 2. 完成名字提取
+# 2. 完成名字提取[完成]
 # 3. 注意中文编码
