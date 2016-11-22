@@ -1,3 +1,9 @@
+If it is a newserver:
+
+You should install git python3(with pip and virtualenv) and nginx by:
+	
+	apt-get install git python3 nginx python-pip python-virtualenv
+
 Before running your websites, you should do these things by steps.
 
 1. Go to the source folder.

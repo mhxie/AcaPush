@@ -2,7 +2,9 @@ from fabric.contrib.files import append, exists, sed
 from fabric.api import env, local, run
 import random
 
-REPO_URL = "https://github.com/Yetocome/Django_test.git"
+
+
+REPO_URL = "https://github.com/Yetocome/AcaPush.git"
 env.hosts=['ubuntu@123.206.196.67',]
 env.key_filename = "~/.ssh/qcloud_key"
 
@@ -19,13 +21,13 @@ def _get_latest_source(source_folder):
     run('cd %s && git reset --hard %s' % (source_folder, current_commit))
 
 def _update_settings(source_folder, site_name):
-    settings_path = source_folder + '/superlists/settings.py'
+    settings_path = source_folder + '/AcaPush/settings.py'
     sed(settings_path, "DEBUG = Ture", "DEBUG = False")
     sed(settings_path,
         'ALLOWED_HOSTS =.+$',
         'ALLOWED_HOSTS = ["%s"]' % (site_name,)
     )
-    secret_key_file = source_folder + '/superlists/secret_key.py'
+    secret_key_file = source_folder + '/AcaPush/secret_key.py'
     if not exists(secret_key_file):
         chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
         key = ''.join(random.SystemRandom().choice(chars) for _ in range(50))
@@ -40,10 +42,10 @@ def _update_virtualenv(source_folder):
         virtualenv_folder, source_folder
     ))
 
-def _update_static_files(source_folder):
-    run('cd %s && ../virtualenv/bin/python3 manage.py collectstatic --noinput' % (
-        source_folder
-    ))
+# def _update_static_files(source_folder):
+#     run('cd %s && ../virtualenv/bin/python3 manage.py collectstatic --noinput' % (
+#         source_folder
+#     ))
 
 def _update_database(source_folder):
     run('cd %s && ../virtualenv/bin/python3 manage.py migrate --noinput' % (
@@ -59,9 +61,13 @@ def deploy(domain_name):
     _get_latest_source(source_folder)
     _update_settings(source_folder, domain_name)
     _update_virtualenv(source_folder)
-    _update_static_files(source_folder)
+    # _update_static_files(source_folder)
     _update_database(source_folder)
 
+
+# Replace REPO_URL
+# Replace settings_path
+# Replace gunicorn-upstart unix
 
 # sed "s/SITENAME/xmhtest.cn/g" deploy_tools/nginx.template.conf | sudo tee /etc/nginx/sites-available/xmhtest.cn
 # sudo ln -s ../sites-available/xmhtest.cn /etc/nginx/sites-enabled/xmhtest.cn
