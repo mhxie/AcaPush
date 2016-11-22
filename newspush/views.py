@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden
-from newspush.models import News, NewsComment, StudentInfo
+from newspush.models import News, NewsComment, StudentInfo, Notice
 from newspush.forms import CommentForm, LoginForm
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.views.decorators.http import require_GET
@@ -9,6 +9,7 @@ from django.core import serializers
 #import requests
 import json
 import re
+import datetime
 # Create your views here.
 
 # 验证需要改进
@@ -86,12 +87,14 @@ def login(request):
             raise HttpResponseForbidden('Wrong form.\n')
 
 def fetch_news(request,aca_id,d):
-    aca_id=request.GET['aca_id']
-    d=request.GET['d']
-
     try:
-        tmp=serializers.serialize(News.objects.filter(academy=aca_id))
-        response_data=serializers.serialize("json",tmp.filter(data__gte=d))
+        y=d[0:3]
+        m=d[4:5]
+        da=d[6:7]
+        tmp=News.objects.filter(academy=aca_id)
+        response_data=tmp.filter(time__year=y)
+        response_data=tmp.filter(time__month=m)
+        response_data=serializers.serialize("json",tmp.filter(time__day=da))
     except ObjectDoesNotExist:
         return HttpResponseNotFound('Error, object does not exsit\n')
 
@@ -99,11 +102,14 @@ def fetch_news(request,aca_id,d):
 	#academy title time sourceURL picURL_Path originURL accessNum
 
 def fetch_notice(request,aca_id,d):
-    aca_id = request.GET['aca_id']
-    d = request.GET['d']
     try:
-        tmp=serializers.serialize(Notice.objects.filter(academy=aca_id))
-        response_data=serializers.serialize("json",tmp.filter(data__gte=d))
+        y=d[0:3]
+        m=d[4:5]
+        da=d[6:7]
+        tmp=Notice.objects.filter(academy=aca_id)
+        response_data=tmp.filter(time__year=y)
+        response_data=tmp.filter(time__month=m)
+        response_data=serializers.serialize("json",tmp.filter(time__day=da))
     except ObjectDoesNotExist:
         return HttpResponseNotFound('Error, object does not exsit\n')
 
@@ -111,32 +117,34 @@ def fetch_notice(request,aca_id,d):
 	#academy title time sourceURL picURL_Path originURL accessNum
 
 def search_news(request,keyword,aca_id,d):
-    keyword=request.GET['keyword']
-    aca=request.GET['academy']
-    d=request.GET['date']
-
     try:
-        tmp=serializers.serialize(News.objects.filter(academy=aca_id))
-        tmp1=serializers.serialize(tmp.filter(data__gte=d))
-        response_data=serializers.serialize("json",tmp1.filter(content__contains=keyword))
+        y=d[0:3]
+        m=d[4:5]
+        da=d[6:7]
+        tmp=News.objects.filter(academy=aca_id)
+        response_data=tmp.filter(time__year=y)
+        response_data=tmp.filter(time__month=m)
+        response_data=tmp.filter(time__day=da)
+        response_data=serializers.serialize("json",response_data.filter(title__contains=keyword))
     except ObjectDoesNotExist:
         return HttpResponseNotFound('Error, object does not exsit\n')
 
-    return HttpResponse(json.dumps(response_data),content__type="application/json")
+    return HttpResponse(json.dumps(response_data),content_type="application/json")
 	#academy title time sourceURL picURL_Path originURL accessNum
 
 def search_notice(request,keyword,aca_id,d):
-    keyword=request.GET['keyword']
-    aca=request.GET['academy']
-    d=request.GET['date']
-
     try:
-        tmp=serializers.serialize(Notice.objects.filter(academy=aca_id))
-        tmp1=serializers.serialize(tmp.filter(data__gte=d))
-        response_data=serializers.serialize("json",tmp1.filter(content__contains=keyword))
+        y=d[0:3]
+        m=d[4:5]
+        da=d[6:7]
+        tmp=Notice.objects.filter(academy=aca_id)
+        response_data=tmp.filter(time__year=y)
+        response_data=tmp.filter(time__month=m)
+        response_data=tmp.filter(time__day=da)
+        response_data=serializers.serialize("json",response_data.filter(title__contains=keyword))#notice在models种title被注释所以报错
     except ObjectDoesNotExist:
         return HttpResponseNotFound('Error, object does not exsit\n')
-    return HttpResponse(json.dumps(response_data),content__type="application/json")
+    return HttpResponse(json.dumps(response_data),content_type="application/json")
 	#academy title time sourceURL picURL_Path originURL accessNum
 
 # To-Do

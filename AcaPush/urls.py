@@ -29,8 +29,8 @@ urlpatterns = [
 	 url(r'^comments/commit/(\d+)/(\d+)/$', commit_comment, name='commit_comment'), #upload the comments to the server
      url(r'^comments/(\d+)/$', fetch_comments, name='fetch_comments'), #return the news of different academy
      url(r'^login/$',login,name='login'),
-	 url(r'^news/(\d{2})/(\d{8})/$', fetch_news, name='fetch_news'), #return the news of different academy before the date(00 or 00000000 will return all)
-	 url(r'^notice/(\d{2})/(\d{8})/$', fetch_notice, name='fetch_notice'), #return the notice of different academy before the date(00 or 00000000 will return all)
-	 url(r'^search_news/(\w{1,15})/(\d{2})/(\d{8})/$', search_news, name='search_news'), #search the news or notice with keyword（w{1,15}) (00 or 00000000 will return all academy and date news)
+	 url(r'^news/(\d{2})/(\d{8})/$', fetch_news, name='fetch_news'), #return the news of different academy and date
+	 url(r'^notice/(\d{2})/(\d{8})/$', fetch_notice, name='fetch_notice'), #return the notice of different academy and date
+	 url(r'^search_news/(\w{1,15})/(\d{2})/(\d{8})/$', search_news, name='search_news'), #search the news or notice with keyword（w{1,15}) 
      url(r'^search_notice/(\w{1,15})/(\d{2})/(\d{8})/$', search_notice, name='search_notice'),
 ]
