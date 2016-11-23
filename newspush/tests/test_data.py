@@ -5,6 +5,7 @@ from newspush.dataUpdate import *
 
 class NewsAcquisitionViewTest(TestCase):
 	def test_can_fetch_news_list_by_time(self):
+		pass
         # self.assertTrue(False)
 		 # getdata()
 		 # get = Academy.objects.all()

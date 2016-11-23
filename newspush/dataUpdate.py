@@ -4,7 +4,7 @@ import time
 import shlex
 import traceback
 import subprocess
-from lalalaapp.models import * 
+from newspush.models import *
 # from django.db import models
 
 
@@ -45,7 +45,7 @@ def data_insert(data):
 	ID = 0
 	# insert information into database
 	ac = Academy.objects.get(name=academy)
-	
+
 	if table=="News":
 		dup = News.objects.filter(originURL=originURL)
 		if(len(dup)!=0):
@@ -99,9 +99,9 @@ def data_insert(data):
 
 # init academy json file
 def init_academy():
-	path = os.path.abspath('.') 
+	path = os.path.abspath('.')
 	# path = "D:/resp/AcaPush"
-	data = open(path+"/src/academy.json");
+	data = open(path+"/src/academy.json","r");
 	try:
 		# data = open(data_name)
 		s = json.load(data)
@@ -121,9 +121,9 @@ def init_academy():
 def runjar(input):
 	cmd = "java -jar notice_crawler-assembly-0.1.jar"
 	p = subprocess.Popen(shlex.split(cmd),shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
-	out, err = p.communicate(input.encode('gbk'))
+	out, err = p.communicate(input.encode())
 	# print(out.decode('gbk'))
-	return out.decode('gbk')
+	return out.decode()
 
 # use listsources commend to update listsources
 def listsources():
@@ -139,13 +139,13 @@ def listsources():
 # sava them into file system
 def getdata():
 	# get listsources
-	path = os.path.abspath('.') 
+	path = os.path.abspath('.')
 	file_name = path+"/src/listsources.json"
 	# file_name = "D:/resp/AcaPush/src/listsources.json"
 	li = open(file_name)
 	js = json.load(li)
 	s = js["result"]
-	# print(s)	
+	# print(s)
 	length1 = len(s["sources"])
 	count = 0
 
@@ -170,7 +170,7 @@ def getdata():
 		if(get["type"] == "err"):
 			print("err in getnews commend when get "+select)
 			continue
-		# save data	
+		# save data
 		length2 = len(get["result"]["news"])
 		print("get "+str(length2)+" "+select+" successfully!")
 		for i in range(0,length2):
@@ -196,9 +196,9 @@ def getdata():
 			# inset into database
 
 # update every 5 min
-def timer(n):  
-    while True:  
-        getdata()  
+def timer(n):
+    while True:
+        getdata()
         time.sleep(n)
 
 if __name__ == '__main__':

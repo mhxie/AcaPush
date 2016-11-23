@@ -178,3 +178,4 @@ def search_notice(request,keyword,aca_id,d):
 # 1. 完成视图测试
 # 2. 完成名字提取[完成]
 # 3. 注意中文编码
+# 4. 潜在安全问题，考虑加密用户名传输
