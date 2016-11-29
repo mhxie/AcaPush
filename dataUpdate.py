@@ -1,13 +1,14 @@
-import os
+import os, django
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "AcaPush.settings")
+django.setup()
+
+# import os
 import json
 import time
 import shlex
 import traceback
 import subprocess
 from newspush.models import *
-# from django.db import models
-
-
 
 # insert news or noice json file
 def data_insert(data):

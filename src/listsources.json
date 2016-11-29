@@ -1,62 +1,63 @@
-{
-  "type" : "succ",
-  "result" : {
-    "sources" : [ {
-      "name" : "ฮฤะยังิบ - ังิบถฏฬฌ",
-      "index" : "http://www.sculj.cn",
-      "school" : "ฮฤะยังิบ"
-    }, {
-      "name" : "พญผรังิบ - ังิบะยฮล",
-      "index" : "http://sesu.scu.edu.cn",
-      "school" : "พญผรังิบ"
-    }, {
-      "name" : "พญผรังิบ - ังิบนซธๆ",
-      "index" : "http://sesu.scu.edu.cn",
-      "school" : "พญผรังิบ"
-    }, {
-      "name" : "ผฦหใป๚ังิบ - ังส๕ฟดฐๅ",
-      "index" : "http://cs.scu.edu.cn",
-      "school" : "ผฦหใป๚ังิบ"
-    }, {
-      "name" : "ผฦหใป๚ังิบ - ังิบอจึช",
-      "index" : "http://cs.scu.edu.cn",
-      "school" : "ผฦหใป๚ังิบ"
-    }, {
-      "name" : "ผฦหใป๚ังิบ - ังิบะยฮล",
-      "index" : "http://cs.scu.edu.cn",
-      "school" : "ผฦหใป๚ังิบ"
-    }, {
-      "name" : "ผฦหใป๚ังิบ - ทรฬธยผ",
-      "index" : "http://cs.scu.edu.cn",
-      "school" : "ผฦหใป๚ังิบ"
-    }, {
-      "name" : "ดจด๓ิฺฯ฿",
-      "index" : "http://news.scu.edu.cn",
-      "school" : "ดจด๓ิฺฯ฿"
-    }, {
-      "name" : "สýังังิบ - ังิบะยฮล",
-      "index" : "http://math.scu.edu.cn",
-      "school" : "สýังังิบ"
-    }, {
-      "name" : "ต็ฦ๘ะลฯขังิบ - ังิบอจึช",
-      "index" : "http://seei.scu.edu.cn",
-      "school" : "ต็ฦ๘ะลฯขังิบ"
-    }, {
-      "name" : "อโน๚ำ๏ังิบ - ังิบนซธๆ",
-      "index" : "http://flc2.scu.edu.cn",
-      "school" : "อโน๚ำ๏ังิบ"
-    }, {
-      "name" : "ฝฬฮ๑ดฆ - อจึช",
-      "index" : "http://jwc.scu.edu.cn",
-      "school" : "ฝฬฮ๑ดฆ"
-    }, {
-      "name" : "ทจังิบ - ังิบะยฮล",
-      "index" : "http://law.scu.edu.cn",
-      "school" : "ทจังิบ"
-    }, {
-      "name" : "ทจังิบ - ังิบนซธๆ",
-      "index" : "http://law.scu.edu.cn",
-      "school" : "ทจังิบ"
-    } ]
-  }
-}
+{
+    "type" : "succ",
+    "result" :
+    {
+        "sources" : [{
+                "name" : "ๆ–ๆ–ฐๅญฆ้ข - ๅญฆ้ขๅจๆ€",
+                "index" : "http://www.sculj.cn",
+                "school" : "ๆ–ๆ–ฐๅญฆ้ข"
+            }, {
+                "name" : "็ปๆตๅญฆ้ข - ๅญฆ้ขๆ–ฐ้—ป",
+                "index" : "http://sesu.scu.edu.cn",
+                "school" : "็ปๆตๅญฆ้ข"
+            }, {
+                "name" : "็ปๆตๅญฆ้ข - ๅญฆ้ขๅ…ฌๅ‘",
+                "index" : "http://sesu.scu.edu.cn",
+                "school" : "็ปๆตๅญฆ้ข"
+            }, {
+                "name" : "่ฎก็ฎ—ๆบๅญฆ้ข - ๅญฆๆฏ็ๆฟ",
+                "index" : "http://cs.scu.edu.cn",
+                "school" : "่ฎก็ฎ—ๆบๅญฆ้ข"
+            }, {
+                "name" : "่ฎก็ฎ—ๆบๅญฆ้ข - ๅญฆ้ข้€็ฅ",
+                "index" : "http://cs.scu.edu.cn",
+                "school" : "่ฎก็ฎ—ๆบๅญฆ้ข"
+            }, {
+                "name" : "่ฎก็ฎ—ๆบๅญฆ้ข - ๅญฆ้ขๆ–ฐ้—ป",
+                "index" : "http://cs.scu.edu.cn",
+                "school" : "่ฎก็ฎ—ๆบๅญฆ้ข"
+            }, {
+                "name" : "่ฎก็ฎ—ๆบๅญฆ้ข - ่ฎฟ่ฐๅฝ•",
+                "index" : "http://cs.scu.edu.cn",
+                "school" : "่ฎก็ฎ—ๆบๅญฆ้ข"
+            }, {
+                "name" : "ๅทๅคงๅจ็บฟ",
+                "index" : "http://news.scu.edu.cn",
+                "school" : "ๅทๅคงๅจ็บฟ"
+            }, {
+                "name" : "ๆ•ฐๅญฆๅญฆ้ข - ๅญฆ้ขๆ–ฐ้—ป",
+                "index" : "http://math.scu.edu.cn",
+                "school" : "ๆ•ฐๅญฆๅญฆ้ข"
+            }, {
+                "name" : "็”ตๆฐ”ไฟกๆฏๅญฆ้ข - ๅญฆ้ข้€็ฅ",
+                "index" : "http://seei.scu.edu.cn",
+                "school" : "็”ตๆฐ”ไฟกๆฏๅญฆ้ข"
+            }, {
+                "name" : "ๅค–ๅฝ่ฏญๅญฆ้ข - ๅญฆ้ขๅ…ฌๅ‘",
+                "index" : "http://flc2.scu.edu.cn",
+                "school" : "ๅค–ๅฝ่ฏญๅญฆ้ข"
+            }, {
+                "name" : "ๆ•ๅกๅค - ้€็ฅ",
+                "index" : "http://jwc.scu.edu.cn",
+                "school" : "ๆ•ๅกๅค"
+            }, {
+                "name" : "ๆณ•ๅญฆ้ข - ๅญฆ้ขๆ–ฐ้—ป",
+                "index" : "http://law.scu.edu.cn",
+                "school" : "ๆณ•ๅญฆ้ข"
+            }, {
+                "name" : "ๆณ•ๅญฆ้ข - ๅญฆ้ขๅ…ฌๅ‘",
+                "index" : "http://law.scu.edu.cn",
+                 "school" : "ๆณ•ๅญฆ้ข"
+            } ]
+    }
+}
