@@ -3,7 +3,7 @@
 软件工程课程作业，开发出能够抓取所有四川大学学院的新闻通知的全平台客户端（包括安卓，iOS，网页），目前作为后端开展项目。
 
 
-## 项目开发进度预计(Last Modification, Nov 8)
+## 项目开发进度预计(Last Modification, Nov 30)
 预计开发时长：两个月（Oct 19 - Dec 19）
 
 * 教学周第七周
@@ -29,13 +29,16 @@
 	* 修改了获取与搜索的四个views[up to Zhoufan Jia, completed]
 	* 完成剩余视图测试编写以及云服务器的主要部署[up to Minghao Xie, completed]
 	* 修改完善后端数据[up to Zhijing Wu, completed]
-* 教学周第十二周[Current week]
+* 教学周第十二周
 	* 和其他小组协商改进接口
 	* 开启admin——后台数据库管理系统
 	* bug修复：
 		* json格式
-		* 
-* 教学周第十三周 - 第十四周  
+		* 解决django异构代码问题
+* 教学周第十三周[Current week]
+	* BUG修复
+	* 接口微调
+* 第十四周  
 	* 对项目进行回顾总结
 	* 调整部署，修改bug
 
