@@ -101,30 +101,32 @@ def data_insert(data):
 # init academy json file
 def init_academy():
 	path = os.path.abspath('.')
-	# path = "D:/resp/AcaPush"
-	data = open(path+"/src/academy.json","r");
-	try:
-		# data = open(data_name)
-		s = json.load(data)
-	except Exception as e:
-		traceback.print_exc()
-		return
-	else:
-		lenth = len(s["academy"])
-		for i in range(0,lenth):
-#			code = s["academy"][i]["code"]
-			name = s["academy"][i]["name"]
-			address = s["academy"][i]["address"]
-			Academy.objects.create(name=name,address=address)
-	data.close()
+	file_name = path+"/src/listsources.json"
+	# file_name = "D:/resp/AcaPush/src/listsources.json"
+	li = open(file_name)
+	js = json.load(li)
+	s = js["result"]
+	# print(s)
+	lenth = len(s["sources"])
+	for i in range(0,lenth):
+#		code = s["academy"][i]["code"]
+		name = s["sources"][i]["school"]
+		address = s["sources"][i]["index"]
+		dup = Academy.objects.filter(name=name)
+		if(len(dup)!=0):
+			print("this data exists now")
+			continue
+		Academy.objects.create(name=name,address=address)
+		print("insert academy "+name+"successfully!")
+	li.close()
 
 # run rhe jar files to get sources
 def runjar(input):
 	cmd = "java -jar notice_crawler-assembly-0.1.jar"
 	p = subprocess.Popen(shlex.split(cmd),shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
-	out, err = p.communicate(input.encode())
+	out, err = p.communicate(input.encode('gbk'))
 	# print(out.decode('gbk'))
-	return out.decode()
+	return out.decode('gbk')
 
 # use listsources commend to update listsources
 def listsources():
