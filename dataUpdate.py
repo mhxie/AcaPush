@@ -123,7 +123,7 @@ def init_academy():
 # run rhe jar files to get sources
 def runjar(input):
 	cmd = "java -jar notice_crawler-assembly-0.1.jar"
-	p = subprocess.Popen(shlex.split(cmd),shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
+	p = subprocess.Popen(cmd,shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
 	out, err = p.communicate(input.encode())
 	# print(out.decode('gbk'))
 	return out.decode()
