@@ -121,16 +121,16 @@ def fetch_news(request,aca_id,d):
         m=d[4:6]
         da=d[6:8]
         response_tmp=News.objects.filter(academy__id=aca_id)
-        #response_tmp=response_tmp.filter(time__year=y)
-        #response_tmp=response_tmp.filter(time__month=m)
-        #response_tmp=response_tmp.filter(time__day=da)
+        response_tmp=response_tmp.filter(time__year=y)
+        response_tmp=response_tmp.filter(time__month=m)
+        response_tmp=response_tmp.filter(time__day=da)
         url=response_tmp[0].sourceURL+"/"
         l=len(response_tmp)
         response_data=[]
         for index in range(l):
            tmp="%s%d"%(url,response_tmp[index].id)+".json"
            li = open(tmp)
-           response_data.extend(json.load(li))
+           response_data.append(json.load(li))
     except ObjectDoesNotExist:
         return HttpResponseNotFound('Error, object does not exsit\n')
 
@@ -144,16 +144,16 @@ def fetch_notice(request,aca_id,d):
         m=d[4:6]
         da=d[6:8]
         response_tmp=Notice.objects.filter(academy__id=aca_id)
-        #response_tmp=response_tmp.filter(time__year=y)
-        #response_tmp=response_tmp.filter(time__month=m)
-        #response_tmp=response_tmp.filter(time__day=da)
+        response_tmp=response_tmp.filter(time__year=y)
+        response_tmp=response_tmp.filter(time__month=m)
+        response_tmp=response_tmp.filter(time__day=da)
         url=response_tmp[0].sourceURL+"/"
         l=len(response_tmp)
         response_data=[]
         for index in range(l):
            tmp="%s%d"%(url,response_tmp[index].id)+".json"
            li = open(tmp)
-           response_data.extend(json.load(li))
+           response_data.append(json.load(li))
     except ObjectDoesNotExist:
         return HttpResponseNotFound('Error, object does not exsit\n')
 
@@ -168,16 +168,16 @@ def search_news(request,keyword,aca_id,d):
         da=d[6:8]
         response_tmp=News.objects.filter(academy__id=aca_id)
         response_tmp=response_tmp.filter(title__contains=keyword)
-        #response_tmp=response_tmp.filter(time__year=y)
-        #response_tmp=response_tmp.filter(time__month=m)
-        #response_tmp=response_tmp.filter(time__day=da)
+        response_tmp=response_tmp.filter(time__year=y)
+        response_tmp=response_tmp.filter(time__month=m)
+        response_tmp=response_tmp.filter(time__day=da)
         url=response_tmp[0].sourceURL+"/"
         l=len(response_tmp)
         response_data=[]
         for index in range(1):
            tmp="%s%d"%(url,response_tmp[index].id)+".json"
            li = open(tmp)
-           response_data.extend(json.load(li))
+           response_data.append(json.load(li))
     except ObjectDoesNotExist:
         return HttpResponseNotFound('Error, object does not exsit\n')
 
@@ -192,14 +192,14 @@ def search_notice(request,keyword,aca_id,d):
         da=d[6:8]
         response_tmp=Notice.objects.filter(academy__id=aca_id)
         response_tmp=response_tmp.filter(title__contains=keyword)
-        #response_tmp=response_tmp.filter(time__year=y)
-        #response_tmp=response_tmp.filter(time__month=m)
-        #response_tmp=response_tmp.filter(time__day=da)
+        response_tmp=response_tmp.filter(time__year=y)
+        response_tmp=response_tmp.filter(time__month=m)
+        response_tmp=response_tmp.filter(time__day=da)
         url=response_tmp[0].sourceURL+"/"
         l=len(response_tmp)
         response_data=[]
         for index in range(l):
-           response_data.extend(json.load(li))
+           response_data.append(json.load(li))
     except ObjectDoesNotExist:
         return HttpResponseNotFound('Error, object does not exsit\n')
 
