@@ -6,6 +6,9 @@ class Academy(models.Model):
     name = models.CharField(max_length=255, default="SCU")
     address = models.CharField(max_length=255, default="www.scu.edu.cn")
 
+    def __str__(self):
+        return self.name
+
 class News(models.Model):
     academy = models.ForeignKey(Academy, default=None)
     # academy = models.CharField(max_length=255)
@@ -17,6 +20,9 @@ class News(models.Model):
     originURL = models.CharField(max_length=255)
     accessNum = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.title
+
 class Notice(models.Model):
     academy = models.ForeignKey(Academy, default=None)
     #academy = models.CharField(max_length=255)
@@ -27,11 +33,19 @@ class Notice(models.Model):
     originURL = models.CharField(max_length=255)
     accessNum = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.title
+
+
 class StudentInfo(models.Model):
     studentID = models.CharField(max_length=255, primary_key=True)
     name = models.CharField(max_length=255)
     nickname = models.CharField(max_length=255, default='')
     lastModified = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.studentID
+
 
 class NewsComment(models.Model):
     news = models.ForeignKey(News, default=None)
@@ -42,3 +56,6 @@ class NewsComment(models.Model):
     ip = models.CharField(max_length=255)
     likes = models.IntegerField(default=0)
     dislikes = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.content
