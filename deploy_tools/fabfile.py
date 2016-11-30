@@ -77,6 +77,8 @@ def deploy(domain_name):
 # sudo service nginx reload
 # sudo start gunicorn-xmhtest.cn
 
+# ../virtualenv/bin/python3 manage.py createsuperuser
+
 ## After future deploy
 # sudo service nginx reload
 # sudo restart gunicorn-xmhtest.cn
