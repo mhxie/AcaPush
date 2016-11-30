@@ -124,7 +124,7 @@ def fetch_news(request,aca_id,d):
         #response_tmp=response_tmp.filter(time__year=y)
         #response_tmp=response_tmp.filter(time__month=m)
         #response_tmp=response_tmp.filter(time__day=da)
-        #url=response_tmp[0].sourceURL+"/"
+        url=response_tmp[0].sourceURL+"/"
         l=len(response_tmp)
         tmp="%s%d"%(url,response_tmp[0].id)+".json"
         li = open(tmp)
@@ -149,7 +149,7 @@ def fetch_notice(request,aca_id,d):
         #response_tmp=response_tmp.filter(time__year=y)
         #response_tmp=response_tmp.filter(time__month=m)
         #response_tmp=response_tmp.filter(time__day=da)
-        #url=response_tmp[0].sourceURL+"/"
+        url=response_tmp[0].sourceURL+"/"
         l=len(response_tmp)
         tmp="%s%d"%(url,response_tmp[0].id)+".json"
         li = open(tmp)
@@ -175,7 +175,7 @@ def search_news(request,keyword,aca_id,d):
         #response_tmp=response_tmp.filter(time__year=y)
         #response_tmp=response_tmp.filter(time__month=m)
         #response_tmp=response_tmp.filter(time__day=da)
-        #url=response_tmp[0].sourceURL+"/"
+        url=response_tmp[0].sourceURL+"/"
         l=len(response_tmp)
         tmp="%s%d"%(url,response_tmp[0].id)+".json"
         li = open(tmp)
@@ -201,7 +201,7 @@ def search_notice(request,keyword,aca_id,d):
         #response_tmp=response_tmp.filter(time__year=y)
         #response_tmp=response_tmp.filter(time__month=m)
         #response_tmp=response_tmp.filter(time__day=da)
-        #url=response_tmp[0].sourceURL+"/"
+        url=response_tmp[0].sourceURL+"/"
         l=len(response_tmp)
         tmp="%s%d"%(url,response_tmp[0].id)+".json"
         li = open(tmp)
