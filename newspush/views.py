@@ -126,13 +126,11 @@ def fetch_news(request,aca_id,d):
         #response_tmp=response_tmp.filter(time__day=da)
         url=response_tmp[0].sourceURL+"/"
         l=len(response_tmp)
-        tmp="%s%d"%(url,response_tmp[0].id)+".json"
-        li = open(tmp)
-        response_data=json.load(li)
-        for index in range(1,l):
+        response_data=[]
+        for index in range(l):
            tmp="%s%d"%(url,response_tmp[index].id)+".json"
            li = open(tmp)
-           response_data=[response_data,json.load(li)]
+           response_data.extend(json.load(li))
     except ObjectDoesNotExist:
         return HttpResponseNotFound('Error, object does not exsit\n')
 
@@ -151,13 +149,11 @@ def fetch_notice(request,aca_id,d):
         #response_tmp=response_tmp.filter(time__day=da)
         url=response_tmp[0].sourceURL+"/"
         l=len(response_tmp)
-        tmp="%s%d"%(url,response_tmp[0].id)+".json"
-        li = open(tmp)
-        response_data=json.load(li)
-        for index in range(1,l):
+        response_data=[]
+        for index in range(l):
            tmp="%s%d"%(url,response_tmp[index].id)+".json"
            li = open(tmp)
-           response_data=[response_data,json.load(li)]
+           response_data.extend(json.load(li))
     except ObjectDoesNotExist:
         return HttpResponseNotFound('Error, object does not exsit\n')
 
@@ -177,13 +173,11 @@ def search_news(request,keyword,aca_id,d):
         #response_tmp=response_tmp.filter(time__day=da)
         url=response_tmp[0].sourceURL+"/"
         l=len(response_tmp)
-        tmp="%s%d"%(url,response_tmp[0].id)+".json"
-        li = open(tmp)
-        response_data=json.load(li)
-        for index in range(1,l):
+        response_data=[]
+        for index in range(1):
            tmp="%s%d"%(url,response_tmp[index].id)+".json"
            li = open(tmp)
-           response_data=[response_data,json.load(li)]
+           response_data.extend(json.load(li))
     except ObjectDoesNotExist:
         return HttpResponseNotFound('Error, object does not exsit\n')
 
@@ -203,13 +197,9 @@ def search_notice(request,keyword,aca_id,d):
         #response_tmp=response_tmp.filter(time__day=da)
         url=response_tmp[0].sourceURL+"/"
         l=len(response_tmp)
-        tmp="%s%d"%(url,response_tmp[0].id)+".json"
-        li = open(tmp)
-        response_data=json.load(li)
-        for index in range(1,l):
-           tmp="%s%d"%(url,response_tmp[index].id)+".json"
-           li = open(tmp)
-           response_data=[response_data,json.load(li)]
+        response_data=[]
+        for index in range(l):
+           response_data.extend(json.load(li))
     except ObjectDoesNotExist:
         return HttpResponseNotFound('Error, object does not exsit\n')
 
