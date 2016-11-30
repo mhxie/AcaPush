@@ -27,8 +27,7 @@ def data_insert(data):
 	except Exception as e:
 		traceback.print_exc()
 		return
-
-	time = '2016-11-19'
+	time = time[0:10]
 	# s = {}
 	# originURL = "originURL"
 	# title = "title"
@@ -89,13 +88,15 @@ def data_insert(data):
 	# save the information to file system
 	try:
 		print("file_path is "+file_path)
-		f = open(file_path + "/" + str(ID) + ".json","w+")
+		file = file_path + "/" + str(ID) + ".json"
+		json.dump(data, open(file, 'w'))
+		print("save into file system successfully!")
+		# f = open(file_path + "/" + str(ID) + ".json","w+")
 	except Exception as e:
 		traceback.print_exc()
 		return
-	else:
-		f.write(str(data))
-		f.close()
+		# f.write(str(data))
+		# f.close()
 	# data.close()
 
 # init academy json file
@@ -166,6 +167,9 @@ def getdata():
 			continue
 		# get news or notices by running jar files
 		cmd = """{"type":"getnews","source":\""""+select+"\"}"
+
+		if select.find("高分子") != -1:
+			continue
 		print(cmd)
 		g = runjar(cmd)
 		# print("lalala "+g+" lalla")
