@@ -28,6 +28,7 @@ def data_insert(data):
 		traceback.print_exc()
 		return
 	time = time[0:10]
+	# time = '2016-11-30'
 	# s = {}
 	# originURL = "originURL"
 	# title = "title"
@@ -89,7 +90,8 @@ def data_insert(data):
 	try:
 		print("file_path is "+file_path)
 		file = file_path + "/" + str(ID) + ".json"
-		json.dump(data, open(file, 'w'))
+		s["id"] = ID
+		json.dump(s, open(file, 'w'))
 		print("save into file system successfully!")
 		# f = open(file_path + "/" + str(ID) + ".json","w+")
 	except Exception as e:
@@ -125,9 +127,9 @@ def init_academy():
 def runjar(input):
 	cmd = "java -jar notice_crawler-assembly-0.1.jar"
 	p = subprocess.Popen(cmd,shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
-	out, err = p.communicate(input.encode())
+	out, err = p.communicate(input.encode('gbk'))
 	# print(out.decode('gbk'))
-	return out.decode()
+	return out.decode('gbk')
 
 # use listsources commend to update listsources
 def listsources():
@@ -201,6 +203,13 @@ def getdata():
 			# count += 1
 			#print(info)
 			# inset into database
+
+def get_academy():
+	a = Academy.objects.all() 
+	for i in range(0,28):
+		name = a[i].name
+		id1 = a[i].id
+		print(str(id1)+" : "+str(name))
 
 # update every 5 min
 def timer(n):
