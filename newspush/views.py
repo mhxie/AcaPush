@@ -117,9 +117,9 @@ def login(request):
 
 def fetch_news(request,aca_id,d):
     try:
-        y=d[0:4]
-        m=d[4:6]
-        da=d[6:8]
+        y=int(d[0:4])
+        m=int(d[4:6])
+        da=int(d[6:8])
         response_tmp=News.objects.filter(academy__id=aca_id)
         response_tmp=response_tmp.filter(time__year=y)
         response_tmp=response_tmp.filter(time__month=m)
@@ -140,9 +140,9 @@ def fetch_news(request,aca_id,d):
 
 def fetch_notice(request,aca_id,d):
     try:
-        y=d[0:4]
-        m=d[4:6]
-        da=d[6:8]
+        y=int(d[0:4])
+        m=int(d[4:6])
+        da=int(d[6:8])
         response_tmp=Notice.objects.filter(academy__id=aca_id)
         response_tmp=response_tmp.filter(time__year=y)
         response_tmp=response_tmp.filter(time__month=m)
@@ -163,9 +163,9 @@ def fetch_notice(request,aca_id,d):
 
 def search_news(request,keyword,aca_id,d):
     try:
-        y=d[0:4]
-        m=d[4:6]
-        da=d[6:8]
+        y=int(d[0:4])
+        m=int(d[4:6])
+        da=int(d[6:8])
         response_tmp=News.objects.filter(academy__id=aca_id)
         response_tmp=response_tmp.filter(title__contains=keyword)
         response_tmp=response_tmp.filter(time__year=y)
@@ -187,9 +187,9 @@ def search_news(request,keyword,aca_id,d):
 
 def search_notice(request,keyword,aca_id,d):
     try:
-        y=d[0:4]
-        m=d[4:6]
-        da=d[6:8]
+        y=int(d[0:4])
+        m=int(d[4:6])
+        da=int(d[6:8])
         response_tmp=Notice.objects.filter(academy__id=aca_id)
         response_tmp=response_tmp.filter(title__contains=keyword)
         response_tmp=response_tmp.filter(time__year=y)
