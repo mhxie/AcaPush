@@ -10,6 +10,8 @@ from django.core import serializers
 import json
 import re
 import datetime
+import urllib
+import os
 # Create your views here.
 
 from django.shortcuts import render_to_response
@@ -115,63 +117,104 @@ def login(request):
 
 def fetch_news(request,aca_id,d):
     try:
-        y=d[0:3]
-        m=d[4:5]
-        da=d[6:7]
-        tmp=News.objects.filter(academy=aca_id)
-        response_data=tmp.filter(time__year=y)
-        response_data=tmp.filter(time__month=m)
-        response_data=serializers.serialize("json",tmp.filter(time__day=da))
+        y=d[0:4]
+        m=d[4:6]
+        da=d[6:8]
+        response_tmp=News.objects.filter(academy__id=aca_id)
+        #response_tmp=response_tmp.filter(time__year=y)
+        #response_tmp=response_tmp.filter(time__month=m)
+        #response_tmp=response_tmp.filter(time__day=da)
+        #url=response_tmp[0].sourceURL+"/"
+        l=len(response_tmp)
+        tmp="%s%d"%(url,response_tmp[0].id)+".json"
+        li = open(tmp)
+        response_data=json.load(li)
+        for index in range(1,l):
+           tmp="%s%d"%(url,response_tmp[index].id)+".json"
+           li = open(tmp)
+           response_data=[response_data,json.load(li)]
     except ObjectDoesNotExist:
         return HttpResponseNotFound('Error, object does not exsit\n')
 
-    return HttpResponse(json.dumps(response_data),content_type="application/json")
+    return HttpResponse(json.dumps
+	(response_data),content_type="application/json")
 	#academy title time sourceURL picURL_Path originURL accessNum
 
 def fetch_notice(request,aca_id,d):
     try:
-        y=d[0:3]
-        m=d[4:5]
-        da=d[6:7]
-        tmp=Notice.objects.filter(academy=aca_id)
-        response_data=tmp.filter(time__year=y)
-        response_data=tmp.filter(time__month=m)
-        response_data=serializers.serialize("json",tmp.filter(time__day=da))
+        y=d[0:4]
+        m=d[4:6]
+        da=d[6:8]
+        response_tmp=Notice.objects.filter(academy__id=aca_id)
+        #response_tmp=response_tmp.filter(time__year=y)
+        #response_tmp=response_tmp.filter(time__month=m)
+        #response_tmp=response_tmp.filter(time__day=da)
+        #url=response_tmp[0].sourceURL+"/"
+        l=len(response_tmp)
+        tmp="%s%d"%(url,response_tmp[0].id)+".json"
+        li = open(tmp)
+        response_data=json.load(li)
+        for index in range(1,l):
+           tmp="%s%d"%(url,response_tmp[index].id)+".json"
+           li = open(tmp)
+           response_data=[response_data,json.load(li)]
     except ObjectDoesNotExist:
         return HttpResponseNotFound('Error, object does not exsit\n')
 
-    return HttpResponse(json.dumps(response_data),content_type="application/json")
+    return HttpResponse(json.dumps
+	(response_data),content_type="application/json")
 	#academy title time sourceURL picURL_Path originURL accessNum
 
 def search_news(request,keyword,aca_id,d):
     try:
-        y=d[0:3]
-        m=d[4:5]
-        da=d[6:7]
-        tmp=News.objects.filter(academy=aca_id)
-        response_data=tmp.filter(time__year=y)
-        response_data=tmp.filter(time__month=m)
-        response_data=tmp.filter(time__day=da)
-        response_data=serializers.serialize("json",response_data.filter(title__contains=keyword))
+        y=d[0:4]
+        m=d[4:6]
+        da=d[6:8]
+        response_tmp=News.objects.filter(academy__id=aca_id)
+        response_tmp=response_tmp.filter(title__contains=keyword)
+        #response_tmp=response_tmp.filter(time__year=y)
+        #response_tmp=response_tmp.filter(time__month=m)
+        #response_tmp=response_tmp.filter(time__day=da)
+        #url=response_tmp[0].sourceURL+"/"
+        l=len(response_tmp)
+        tmp="%s%d"%(url,response_tmp[0].id)+".json"
+        li = open(tmp)
+        response_data=json.load(li)
+        for index in range(1,l):
+           tmp="%s%d"%(url,response_tmp[index].id)+".json"
+           li = open(tmp)
+           response_data=[response_data,json.load(li)]
     except ObjectDoesNotExist:
         return HttpResponseNotFound('Error, object does not exsit\n')
 
-    return HttpResponse(json.dumps(response_data),content_type="application/json")
+    return HttpResponse(json.dumps
+	(response_data),content_type="application/json")
 	#academy title time sourceURL picURL_Path originURL accessNum
 
 def search_notice(request,keyword,aca_id,d):
     try:
-        y=d[0:3]
-        m=d[4:5]
-        da=d[6:7]
-        tmp=Notice.objects.filter(academy=aca_id)
-        response_data=tmp.filter(time__year=y)
-        response_data=tmp.filter(time__month=m)
-        response_data=tmp.filter(time__day=da)
-        response_data=serializers.serialize("json",response_data.filter(title__contains=keyword))#notice在models种title被注释所以报错
+        y=d[0:4]
+        m=d[4:6]
+        da=d[6:8]
+        response_tmp=Notice.objects.filter(academy__id=aca_id)
+        response_tmp=response_tmp.filter(title__contains=keyword)
+        #response_tmp=response_tmp.filter(time__year=y)
+        #response_tmp=response_tmp.filter(time__month=m)
+        #response_tmp=response_tmp.filter(time__day=da)
+        #url=response_tmp[0].sourceURL+"/"
+        l=len(response_tmp)
+        tmp="%s%d"%(url,response_tmp[0].id)+".json"
+        li = open(tmp)
+        response_data=json.load(li)
+        for index in range(1,l):
+           tmp="%s%d"%(url,response_tmp[index].id)+".json"
+           li = open(tmp)
+           response_data=[response_data,json.load(li)]
     except ObjectDoesNotExist:
         return HttpResponseNotFound('Error, object does not exsit\n')
-    return HttpResponse(json.dumps(response_data),content_type="application/json")
+
+    return HttpResponse(json.dumps
+	(response_data),content_type="application/json")
 	#academy title time sourceURL picURL_Path originURL accessNum
 
 # To-Do

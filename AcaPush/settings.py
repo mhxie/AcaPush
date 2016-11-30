@@ -26,7 +26,7 @@ SECRET_KEY = '@q1^nl7u&-9=@f#p7gatmroguv(0us_os=d-c!*()$-o_z&*z9'
 # DEBUG = False
 DEBUG = True
 
-ALLOWED_HOSTS = ['xmhtest.cn']
+ALLOWED_HOSTS = ['xmhtest.cn','127.0.0.1']
 
 
 # Application definition
