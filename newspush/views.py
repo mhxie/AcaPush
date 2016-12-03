@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden
+from django.http import (
+    HttpResponse, HttpResponseNotFound, HttpResponseForbidden, JsonResponse
+)
 from newspush.models import News, NewsComment, StudentInfo, Notice
 from newspush.forms import CommentForm, LoginForm
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
@@ -17,6 +19,11 @@ import os
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
+def my_serialize(_from_models):
+    a = []
+    for k in _from_models:
+        a.append(k)
+    return a
 
 def handler404(request):
     response = render_to_response('404.html', {},
@@ -64,14 +71,11 @@ def fetch_comments(request, news_id):
         # return HttpResponseNotFound('Error news id\n')
         return handler404(request)
     returned_comments = NewsComment.objects.filter(news=news_)
-    response_data = serializers.serialize('json', returned_comments,
-                                        #   fields=(
-                                        #     'studentInfo',
-                                        #     'content',
-                                        #     'time',
-                                        #     'ip')
-                                            )
-    return HttpResponse(json.dumps(response_data), content_type="application/json")
+    returned_data = returned_comments.values('studentInfo_id', 'content', 'time', 'ip')
+    # return HttpResponse(json.dumps(returned_data), content_type="application/json")
+    return JsonResponse(my_serialize(returned_data), safe=False)
+    # return JsonResponse(serializers.serialize('json', returned_comments), safe=False)
+    # response = JsonResponse(dict(genres=list(Genre.objects.values('name', 'color'))))
 
 def login(request):
     if request.method == 'POST':
