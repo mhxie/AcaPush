@@ -35,10 +35,10 @@
 	* bug修复：
 		* json格式
 		* 解决django异构代码问题
-* 教学周第十三周[Current week]
-	* BUG修复
+* 教学周第十三周
+	* BUG修复，解决了
 	* 接口微调
-* 第十四周  
+* 第十四周[Current week]
 	* 对项目进行回顾总结
 	* 调整部署，修改bug
 
