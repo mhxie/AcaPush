@@ -1,3 +1,4 @@
 Django==1.9.5
 gunicorn==19.6.0
 pytz
+django-cors-headers
