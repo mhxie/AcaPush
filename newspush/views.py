@@ -125,9 +125,10 @@ def fetch_news(request,aca_id,d):
         m=int(d[4:6])
         da=int(d[6:8])
         response_tmp=News.objects.filter(academy__id=aca_id)
-        response_tmp=response_tmp.filter(time__year=y)
-        response_tmp=response_tmp.filter(time__month=m)
-        response_tmp=response_tmp.filter(time__day=da)
+        if d!='00000000':
+            response_tmp=response_tmp.filter(time__year=y)
+            response_tmp=response_tmp.filter(time__month=m)
+            response_tmp=response_tmp.filter(time__day=da)
         if len(response_tmp)==0:
            return HttpResponseNotFound('there is no such information\n')
         url=response_tmp[0].sourceURL+"/"
@@ -150,9 +151,10 @@ def fetch_notice(request,aca_id,d):
         m=int(d[4:6])
         da=int(d[6:8])
         response_tmp=Notice.objects.filter(academy__id=aca_id)
-        response_tmp=response_tmp.filter(time__year=y)
-        response_tmp=response_tmp.filter(time__month=m)
-        response_tmp=response_tmp.filter(time__day=da)
+        if d!='00000000':
+            response_tmp=response_tmp.filter(time__year=y)
+            response_tmp=response_tmp.filter(time__month=m)
+            response_tmp=response_tmp.filter(time__day=da)
         if len(response_tmp)==0:
            return HttpResponseNotFound('there is no such information\n')
         url=response_tmp[0].sourceURL+"/"
