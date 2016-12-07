@@ -127,9 +127,9 @@ def init_academy():
 def runjar(input):
 	cmd = "java -jar notice_crawler-assembly-0.1.jar"
 	p = subprocess.Popen(cmd,shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
-	out, err = p.communicate(input.encode())
+	out, err = p.communicate(input.encode('gbk'))
 	# print(out.decode())
-	return out.decode()
+	return out.decode('gbk')
 
 # use listsources commend to update listsources
 def listsources():
@@ -143,7 +143,7 @@ def listsources():
 
 # use getnews commend to get information
 # sava them into file system
-def getdata():
+def getdata(n):
 	# get listsources
 	path = os.path.abspath('.')
 	file_name = path+"/src/listsources.json"
@@ -168,7 +168,7 @@ def getdata():
 		else:
 			continue
 		# get news or notices by running jar files
-		cmd = """{"type":"getnews","source":\""""+select+"\"}"
+		cmd = """{"type":"getnews","source":\""""+select+"""\","limit":"""+str(n)+"}"
 
 		if select.find("高分子") != -1:
 			continue
@@ -214,7 +214,7 @@ def get_academy():
 # update every 5 min
 def timer(n):
     while True:
-        getdata()
+        getdata(10)
         time.sleep(n)
 
 if __name__ == '__main__':
