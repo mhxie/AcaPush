@@ -2,8 +2,6 @@ from fabric.contrib.files import append, exists, sed
 from fabric.api import env, local, run
 import random
 
-
-
 REPO_URL = "https://github.com/Yetocome/AcaPush.git"
 env.hosts=['ubuntu@123.206.196.67',]
 env.key_filename = "~/.ssh/qcloud_key"
@@ -22,7 +20,7 @@ def _get_latest_source(source_folder):
 
 def _update_settings(source_folder, site_name):
     settings_path = source_folder + '/AcaPush/settings.py'
-    sed(settings_path, "DEBUG = Ture", "DEBUG = False")
+    sed(settings_path, "DEBUG = True", "DEBUG = False")
     sed(settings_path,
         'ALLOWED_HOSTS =.+$',
         'ALLOWED_HOSTS = ["%s"]' % (site_name,)
@@ -52,6 +50,14 @@ def _update_database(source_folder):
         source_folder
     ))
 
+def _wash_database(source_folder):
+    run('cd %s && rm db.sqlite3' % (
+        source_folder
+    ))
+
+def _crawl_data(source_folder):
+    pass
+
 # usage: `fab deploy:xmhtest.cn`
 def deploy(domain_name):
     site_folder = '/home/%s/sites/%s' % (env.user, domain_name)
@@ -63,6 +69,19 @@ def deploy(domain_name):
     _update_virtualenv(source_folder)
     _update_static_files(source_folder)
     _update_database(source_folder)
+
+def wash(domain_name):
+    site_folder = '/home/%s/sites/%s' % (env.user, domain_name)
+
+    source_folder = site_folder + '/source'
+    _wash_database(source_folder)
+    _update_database(source_folder)
+
+def crawl(domain_name):
+    site_folder = '/home/%s/sites/%s' % (env.user, domain_name)
+
+    source_folder = site_folder + '/source'
+    _crawl_data(source_folder)
 
 ## Before deploy
 # Replace REPO_URL
