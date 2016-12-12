@@ -128,9 +128,9 @@ def init_academy():
 def runjar(input):
 	cmd = "java -jar notice_crawler-assembly-0.1.jar"
 	p = subprocess.Popen(cmd,shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
-	out, err = p.communicate(input.encode(''))
+	out, err = p.communicate(input.encode())
 	# print(out.decode())
-	return out.decode('')
+	return out.decode()
 
 # use listsources commend to update listsources
 def listsources():
