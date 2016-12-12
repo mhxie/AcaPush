@@ -51,7 +51,7 @@ def _update_database(source_folder):
     ))
 
 def _init_database(source_folder):
-    run('cd %s && ../virtualenv/bin/python3 dataupdate.py init' % (
+    run('cd %s && ../virtualenv/bin/python3 dataUpdate.py init' % (
         source_folder
     ))
 
@@ -61,7 +61,7 @@ def _wash_database(source_folder):
     ))
 
 def _crawl_data(source_folder, size):
-    run('cd %s && ../virtualenv/bin/python3 dataupdate.py %s' % (
+    run('cd %s && ../virtualenv/bin/python3 dataUpdate.py %s' % (
         source_folder, size
     ))
 
@@ -113,6 +113,10 @@ def crawl(domain_name, size):
 # sed "s/SITENAME/api-staging.xmhtest.cn/g" deploy_tools/gunicorn-upstart.template.conf | sudo tee /etc/init/gunicorn-api-staging.xmhtest.cn.conf
 # sudo service nginx reload
 # sudo start gunicorn-api-staging.xmhtest.cn
+
+## After first deploy - both
+# fab wash:api-staging.xmhtest.cn
+# fab crawl:api-staging.xmhtest.cn, 1000
 
 ## After future deploy
 # sudo service nginx reload

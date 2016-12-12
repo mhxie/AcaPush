@@ -222,6 +222,7 @@ if __name__ == '__main__':
 	if sys.argv[1] == 'init':
 		print('Initializing...')
 		try:
+			listsources()
 			init_academy()
 			print('Initializing succeeded.')
 		except Exception:
