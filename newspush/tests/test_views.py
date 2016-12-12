@@ -1,7 +1,6 @@
 from django.core.urlresolvers import resolve
 from django.test import TestCase
 from django.http import HttpRequest
-from django.template.loader import render_to_string
 from django.utils.html import escape
 from unittest import skip
 
@@ -127,9 +126,20 @@ class CommentsAcquisitionViewTest(TestCase):
         response = self.client.get('/comments/123/')
         self.assertEqual(response.status_code, 404)
 
-def LoginFormViewTest(TestCase):
+class LoginFormViewTest(TestCase):
     def test_can_login(self):
-        pass
+        self.client.post(
+            '/login/',
+            data={
+                'scu_id': '2014141462274',
+                'password': 'mypassword',
+                'nickname': 'xmh',
+            }
+        )
+        self.assertEqual(StudentInfo.objects.count(), 1)
+        stud = StudentInfo.objects.first()
+        self.assertEqual(stud.name, '谢明浩')
+        self.assertEqual(stud.nickname, 'xmh')
 
 class NoticesViewTest(TestCase):
     def test_can_fetch_notices_list_by_time(self):

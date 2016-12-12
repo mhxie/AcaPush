@@ -34,7 +34,7 @@ class LoginFormTest(TestCase):
     valid_form = LoginForm(data={
         'scu_id': '2014141466666',
         'password': '666666',
-        'name': 'normal name',
+        # 'name': 'normal name',
         'nickname': 'abnormal name',
     })
     def test_valid_form_can_pass_validation(self):
@@ -53,11 +53,11 @@ class LoginFormTest(TestCase):
         self.assertFalse(invalid_form.is_valid())
         self.assertEqual(invalid_form.errors['password'], [EMPTY_INPUT_ERROR])
 
-    def test_form_validation_for_too_long_name(self):
-        invalid_form = deepcopy(LoginFormTest.valid_form)
-        invalid_form.data['name'] = '012345678901234567890'
-        self.assertFalse(invalid_form.is_valid())
-        self.assertEqual(invalid_form.errors['name'], [TOO_LONG_ERROR])
+    # def test_form_validation_for_too_long_name(self):
+    #     invalid_form = deepcopy(LoginFormTest.valid_form)
+    #     invalid_form.data['name'] = '012345678901234567890'
+    #     self.assertFalse(invalid_form.is_valid())
+    #     self.assertEqual(invalid_form.errors['name'], [TOO_LONG_ERROR])
 
     def test_form_validation_for_too_long_nickname(self):
         invalid_form = deepcopy(LoginFormTest.valid_form)

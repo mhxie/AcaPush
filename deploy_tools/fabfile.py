@@ -116,7 +116,7 @@ def crawl(domain_name, size):
 
 ## After first deploy - both
 # fab wash:api-staging.xmhtest.cn
-# fab crawl:api-staging.xmhtest.cn, 1000
+# fab crawl:api-staging.xmhtest.cn,1000
 
 ## After future deploy
 # sudo service nginx reload

@@ -8,7 +8,7 @@ from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.views.decorators.http import require_GET
 from django.db.utils import OperationalError
 from django.core import serializers
-#import requests
+import requests
 import json
 import re
 import datetime
@@ -101,19 +101,20 @@ def login(request):
                     pos += 1
                     name_ch = gbk_content[pos]
                 stu = None
+                scu_id = form_data['scu_id']
                 try:
-                    stu = StudentInfo.objects.get(studentID=stu_id)
+                    stu = StudentInfo.objects.get(studentID=scu_id)
                 except ObjectDoesNotExist:
-                    stu = StudentInfo(studentID=form_data['scu_id'])
+                    stu = StudentInfo(studentID=scu_id)
                 stu.nickname = form_data['nickname']
                 stu.name = stu_name
                 stu.save()
                 html = "<html><body>Login succeeds./nThis guy's name is %s.</body></html>" % stu_name
                 return HttpResponse(html)
             else:
-                raise HttpResponseNotFound('Unknown error.\n')
+                return HttpResponseNotFound('Unknown error.\n')
         else:
-            raise HttpResponseForbidden('Wrong form.\n')
+            return HttpResponseForbidden('Wrong id with password.\n')
     else:
         # return HttpResponseNotFound('What are you doing?\n')
         return handler404(request)

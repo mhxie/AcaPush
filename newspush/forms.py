@@ -29,7 +29,7 @@ class LoginForm(forms.Form):
                                 'min_length': TOO_SHORT_ERROR,
                             })
     password = forms.CharField(error_messages={'required': EMPTY_INPUT_ERROR})
-    name = forms.CharField(required=False, max_length=20,
-                           error_messages={'max_length': TOO_LONG_ERROR})
+    # name = forms.CharField(required=False, max_length=20,
+    #                        error_messages={'max_length': TOO_LONG_ERROR})
     nickname = forms.CharField(required=False, max_length=20,
                                error_messages={'max_length': TOO_LONG_ERROR})
