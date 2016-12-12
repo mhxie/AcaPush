@@ -182,14 +182,6 @@
       "index" : "http://physics.scu.edu.cn",
       "school" : "物理科学与技术学院（核科学与工程技术学院）通知"
     }, {
-      "name" : "旅游学院 - 通知",
-      "index" : "http://historytourism.scu.edu.cn",
-      "school" : "旅游学院"
-    }, {
-      "name" : "旅游学院 - 新闻",
-      "index" : "http://historytourism.scu.edu.cn",
-      "school" : "旅游学院"
-    }, {
       "name" : "化学学院 - 新闻",
       "index" : "http://chem.scu.edu.cn",
       "school" : "化学学院"
@@ -221,6 +213,14 @@
       "name" : "制造科学与工程 - 公告",
       "index" : "http://msec.scu.edu.cn",
       "school" : "制造科学与工程"
+    }, {
+      "name" : "旅游学院 - 通知",
+      "index" : "http://historytourism.scu.edu.cn",
+      "school" : "旅游学院"
+    }, {
+      "name" : "旅游学院 - 新闻",
+      "index" : "http://historytourism.scu.edu.cn",
+      "school" : "旅游学院"
     }, {
       "name" : "教务处 - 通知",
       "index" : "http://jwc.scu.edu.cn",

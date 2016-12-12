@@ -24,6 +24,7 @@ def data_insert(data):
 		originURL = s["originURL"]
 		category = s["category"]
 		content = s["content"]
+		picURL_Path = s["picURL_Path"]
 	except Exception as e:
 		traceback.print_exc()
 		return
@@ -54,7 +55,7 @@ def data_insert(data):
 			return
 		file_path = path + "/News"
 		try:
-			News.objects.create(academy=ac,title=title,time=time,sourceURL=file_path,originURL=originURL)
+			News.objects.create(academy=ac,picURL_Path=picURL_Path,title=title,time=time,sourceURL=file_path,originURL=originURL)
 			print("succ insert into database news")
 		except Exception as e:
 			traceback.print_exc()
@@ -127,9 +128,9 @@ def init_academy():
 def runjar(input):
 	cmd = "java -jar notice_crawler-assembly-0.1.jar"
 	p = subprocess.Popen(cmd,shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
-	out, err = p.communicate(input.encode())
+	out, err = p.communicate(input.encode(''))
 	# print(out.decode())
-	return out.decode()
+	return out.decode('')
 
 # use listsources commend to update listsources
 def listsources():
@@ -165,6 +166,8 @@ def getdata(n):
 			category = "News"
 		elif select.find("通知") != -1:
 			category = "Notice"
+		elif select.find("公告") != -1:
+			category = "Notice"
 		else:
 			continue
 		# get news or notices by running jar files
@@ -191,6 +194,12 @@ def getdata(n):
 			info["time"] = get["result"]["news"][i]["date"]
 			info["academy"] = academy
 			info["category"] = category
+
+			info["html1"] = get["result"]["news"][i]["html1"]
+			info["html2"] = get["result"]["news"][i]["html2"]
+			info["picURL_Path"] = get["result"]["news"][i]["imgs"]
+			info["text"] = get["result"]["news"][i]["text"]
+
 			# print("info is ")
 			# print(info)
 			data_insert(info)
