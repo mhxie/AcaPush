@@ -119,7 +119,12 @@ def login(request):
         # return HttpResponseNotFound('What are you doing?\n')
         return handler404(request)
 
-
+def logout(request, scu_id):
+    try:
+        StudentInfo.objects.get(studentID=scu_id).delete()
+        return HttpResponse('Logout succeeds.')
+    except ObjectDoesNotExist:
+        return HttpResponseNotFound('Not recoreded student.\n')
 def fetch_news(request,aca_id,d):
     try:
         y=int(d[0:4])

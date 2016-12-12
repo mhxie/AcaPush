@@ -18,7 +18,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from newspush.views import commit_comment
 from newspush.views import fetch_comments
-from newspush.views import login
+from newspush.views import login, logout
 from newspush.views import fetch_news
 from newspush.views import fetch_notice
 from newspush.views import fetch_news
@@ -32,6 +32,7 @@ urlpatterns = [
 	url(r'^comments/commit/(\d+)/(\d+)/$', commit_comment, name='commit_comment'), #upload the comments to the server
     url(r'^comments/(\d+)/$', fetch_comments, name='fetch_comments'), #return the news of different academy
     url(r'^login/$',login,name='login'),
+    url(r'^logout/(\d+)/$',logout,name='logout'),
 	url(r'^news/(\d+)/(\d{8})/$', fetch_news, name='fetch_news'), #return the news of different academy and date
 	url(r'^notice/(\d+)/(\d{8})/$', fetch_notice, name='fetch_notice'), #return the notice of different academy and date
 	url(r'^search_news/(\w{1,15})/(\d+)/(\d{8})/$', search_news, name='search_news'), #search the news or notice with keyword（w{1,15})
