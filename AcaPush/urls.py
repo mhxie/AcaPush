@@ -36,6 +36,6 @@ urlpatterns = [
 	url(r'^notice/(\d+)/(\d{8})/$', fetch_notice, name='fetch_notice'), #return the notice of different academy and date
 	url(r'^search_news/(\w{1,15})/(\d+)/(\d{8})/$', search_news, name='search_news'), #search the news or notice with keyword（w{1,15})
     url(r'^search_notice/(\w{1,15})/(\d+)/(\d{8})/$', search_notice, name='search_notice'),
-	url(r'new_news/(\d+)/(\d+)/$',fetch_new_news,name='fetch_new_news'),
-	url(r'new_notice/(\d+)/(\d+)/$',fetch_new_notice,name='fetch_new_notice'),
+	url(r'^new_news/(\d+)/(\d+)/$',fetch_new_news,name='fetch_new_news'),
+	url(r'^new_notice/(\d+)/(\d+)/$',fetch_new_notice,name='fetch_new_notice'),
 ]
