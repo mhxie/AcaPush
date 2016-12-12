@@ -79,8 +79,9 @@ def fetch_comments(request, news_id):
 
 def login(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
+        form = LoginForm(data=request.POST)
         if not form.is_valid():
+
             return HttpResponseNotFound('Post invalid.\n')
         form_data = form.data
         post_data = {
