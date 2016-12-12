@@ -10,8 +10,32 @@ import json
 
 class NewsAcquisitionViewTest(TestCase):
     def test_can_fetch_news_list_by_time(self):
-        pass
+        academy_ = Academy.objects.create()
+        news_ = News.objects.create(academy=academy_,title='Test title',sourceURL='Test sourceURL',picURL_Path='Test picURL_Path',originURL='Test originURL')
+        d = str(news_.time.year)+str(news_.time.month)+str(news_.time.day)    
+        response = self.client.post(
+            '/news/%d/%d/' % (news_.id,d),
+            data=self.get_test_comment()
+        )
+        date_time = NewsComment.objects.first().time.isoformat()
+        self.assertEqual(response.status_code, 200)
+        # print(response.content)
+        # print(NewsComment.objects.first().time)
+        true_json = {
+                        'model': 'newspush.news',
+                        'pk': 1,
+                        'fileds': {
+                            'academy': 1,
+                            'title': 'Test title',
+                            'time': date_time,
+                            'sourceURL': 'Test sourceURL',
+                            'picURL_Path': 'Test picURL_Path',
+                            'originURL': 'Test originURL',
+                            'accessNum': 0
+                        }
+                    }
 
+        actual_json = json.loads(response.content.decode('utf8'))
     def test_can_fetch_news_list_by_academic(self):
         pass
 

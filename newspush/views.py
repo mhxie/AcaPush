@@ -220,6 +220,60 @@ def search_notice(request,keyword,aca_id,d):
     return HttpResponse(json.dumps
 	(response_data),content_type="application/json")
 	#academy title time sourceURL picURL_Path originURL accessNum
+def fetch_new_news(request,aca_id,notice_id):
+    try:
+        response_tmp1=News.objects.filter(academy__id=aca_id)
+        response_tmp1=response_tmp1.filter(id__lt=notice_id)
+        response_tmp1=sorted(response_tmp1,key=lambda Notice:Notice.time)
+        response_tmp=[]
+        length=len(response_tmp1)
+        flag=0
+        while(flag<10 and (length-flag>0)):
+            response_tmp.append(response_tmp1[length-flag-1])
+            flag=flag+1
+        #response_tmp1=response_tmp1.filter(id__let=notice_id)
+        if len(response_tmp)==0:
+           return HttpResponseNotFound('there is no such information\n')
+        url=response_tmp[0].sourceURL+"/"
+        l=len(response_tmp)
+        response_data=[]
+        for index in range(l):
+           tmp="%s%d"%(url,response_tmp[index].id)+".json"
+           li = open(tmp)
+           response_data.append(json.load(li))
+    except ObjectDoesNotExist:
+        return HttpResponseNotFound('Error, object does not exsit\n')
+
+    return HttpResponse(json.dumps
+	(response_data),content_type="application/json")
+	#academy title time sourceURL picURL_Path originURL accessNum
+def fetch_new_notice(request,aca_id,notice_id):
+    try:
+        response_tmp1=Notice.objects.filter(academy__id=aca_id)
+        response_tmp1=response_tmp1.filter(id__lt=notice_id)
+        response_tmp1=sorted(response_tmp1,key=lambda Notice:Notice.time)
+        response_tmp=[]
+        length=len(response_tmp1)
+        flag=0
+        while(flag<10 and (length-flag>0)):
+            response_tmp.append(response_tmp1[length-flag-1])
+            flag=flag+1
+        #response_tmp1=response_tmp1.filter(id__let=notice_id)
+        if len(response_tmp)==0:
+           return HttpResponseNotFound('there is no such information\n')
+        url=response_tmp[0].sourceURL+"/"
+        l=len(response_tmp)
+        response_data=[]
+        for index in range(l):
+           tmp="%s%d"%(url,response_tmp[index].id)+".json"
+           li = open(tmp)
+           response_data.append(json.load(li))
+    except ObjectDoesNotExist:
+        return HttpResponseNotFound('Error, object does not exsit\n')
+
+    return HttpResponse(json.dumps
+	(response_data),content_type="application/json")
+	#academy title time sourceURL picURL_Path originURL accessNum
 
 # To-Do
 # 1. 完成视图测试
