@@ -205,7 +205,7 @@ def getdata(n):
 			# inset into database
 
 def get_academy():
-	a = Academy.objects.all() 
+	a = Academy.objects.all()
 	for i in range(0,28):
 		name = a[i].name
 		id1 = a[i].id
@@ -219,4 +219,12 @@ def timer(n):
 
 if __name__ == '__main__':
 	import sys
-	getdata(sys.argv[1])
+	if sys.argv[1] == 'init':
+		print('Initializing...')
+		try:
+			init_academy()
+			print('Initializing succeeded.')
+		except Exception:
+			print('Initializing failed.')
+	else:
+		getdata(sys.argv[1])

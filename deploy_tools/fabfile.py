@@ -50,13 +50,20 @@ def _update_database(source_folder):
         source_folder
     ))
 
+def _init_database(source_folder):
+    run('cd %s && ../virtualenv/bin/python3 dataupdate.py init' % (
+        source_folder
+    ))
+
 def _wash_database(source_folder):
     run('cd %s && rm db.sqlite3' % (
         source_folder
     ))
 
-def _crawl_data(source_folder):
-    pass
+def _crawl_data(source_folder, size):
+    run('cd %s && ../virtualenv/bin/python3 dataupdate.py %s' % (
+        source_folder, size
+    ))
 
 # usage: `fab deploy:xmhtest.cn`
 def deploy(domain_name):
@@ -76,19 +83,20 @@ def wash(domain_name):
     source_folder = site_folder + '/source'
     _wash_database(source_folder)
     _update_database(source_folder)
+    _init_database(source_folder)
 
-def crawl(domain_name):
+def crawl(domain_name, size):
     site_folder = '/home/%s/sites/%s' % (env.user, domain_name)
 
     source_folder = site_folder + '/source'
-    _crawl_data(source_folder)
+    _crawl_data(source_folder, size)
 
 ## Before deploy
 # Replace REPO_URL
 # Replace settings_path
 # Replace gunicorn-upstart unix
 
-## After first deploy
+## After first deploy - live
 # cd /sites/xmhtest.cn/source
 # sed "s/SITENAME/xmhtest.cn/g" deploy_tools/nginx.template.conf | sudo tee /etc/nginx/sites-available/xmhtest.cn
 # sudo ln -s ../sites-available/xmhtest.cn /etc/nginx/sites-enabled/xmhtest.cn
@@ -98,6 +106,16 @@ def crawl(domain_name):
 
 # ../virtualenv/bin/python3 manage.py createsuperuser
 
+## After first deploy - staging
+# cd /sites/api-staging.xmhtest.cn/source
+# sed "s/SITENAME/api-staging.xmhtest.cn/g" deploy_tools/nginx.template.conf | sudo tee /etc/nginx/sites-available/api-staging.xmhtest.cn
+# sudo ln -s ../sites-available/api-staging.xmhtest.cn /etc/nginx/sites-enabled/api-staging.xmhtest.cn
+# sed "s/SITENAME/api-staging.xmhtest.cn/g" deploy_tools/gunicorn-upstart.template.conf | sudo tee /etc/init/gunicorn-api-staging.xmhtest.cn.conf
+# sudo service nginx reload
+# sudo start gunicorn-api-staging.xmhtest.cn
+
 ## After future deploy
 # sudo service nginx reload
 # sudo restart gunicorn-xmhtest.cn
+
+# sudo restart gunicorn-api-staging.xmhtest.cn
