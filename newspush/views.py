@@ -178,16 +178,11 @@ def fetch_notice(request,aca_id,d):
 	(response_data),content_type="application/json")
 	#academy title time sourceURL picURL_Path originURL accessNum
 
-def search_news(request,keyword,aca_id,d):
+def search_news(request,aca_id,keyword):
     try:
-        y=int(d[0:4])
-        m=int(d[4:6])
-        da=int(d[6:8])
-        response_tmp=News.objects.filter(academy__id=aca_id)
-        response_tmp=response_tmp.filter(title__contains=keyword)
-        response_tmp=response_tmp.filter(time__year=y)
-        response_tmp=response_tmp.filter(time__month=m)
-        response_tmp=response_tmp.filter(time__day=da)
+        response_tmp=News.objects.filter(title__contains=keyword)
+        if aca_id!='0':
+            response_tmp=response_tmp.filter(academy__id=aca_id)
         if len(response_tmp)==0:
            return HttpResponseNotFound('there is no such information\n')
         url=response_tmp[0].sourceURL+"/"
@@ -204,16 +199,11 @@ def search_news(request,keyword,aca_id,d):
 	(response_data),content_type="application/json")
 	#academy title time sourceURL picURL_Path originURL accessNum
 
-def search_notice(request,keyword,aca_id,d):
+def search_notice(request,aca_id,keyword):
     try:
-        y=int(d[0:4])
-        m=int(d[4:6])
-        da=int(d[6:8])
-        response_tmp=Notice.objects.filter(academy__id=aca_id)
-        response_tmp=response_tmp.filter(title__contains=keyword)
-        response_tmp=response_tmp.filter(time__year=y)
-        response_tmp=response_tmp.filter(time__month=m)
-        response_tmp=response_tmp.filter(time__day=da)
+        response_tmp=Notice.objects.filter(title__contains=keyword)
+        if aca_id!='0':
+            response_tmp=response_tmp.filter(academy__id=aca_id)
         if len(response_tmp)==0:
            return HttpResponseNotFound('there is no such information\n')
         url=response_tmp[0].sourceURL+"/"
