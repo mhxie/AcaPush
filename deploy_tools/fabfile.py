@@ -66,6 +66,7 @@ def _crawl_data(source_folder, size):
     ))
 
 # usage: `fab deploy:xmhtest.cn`
+# fab deploy:api-staging.xmhtest.cn
 def deploy(domain_name):
     site_folder = '/home/%s/sites/%s' % (env.user, domain_name)
 
@@ -115,6 +116,7 @@ def crawl(domain_name, size):
 # sudo start gunicorn-api-staging.xmhtest.cn
 
 ## After first deploy - both
+# fab deploy:api-staging.xmhtest.cn
 # fab wash:api-staging.xmhtest.cn
 # fab crawl:api-staging.xmhtest.cn,1000
 

@@ -81,7 +81,8 @@ def login(request):
     if request.method == 'POST':
         form = LoginForm(data=request.POST)
         if not form.is_valid():
-
+            print(form)
+            print(form.errors)
             return HttpResponseNotFound('Post invalid.\n')
         form_data = form.data
         post_data = {
